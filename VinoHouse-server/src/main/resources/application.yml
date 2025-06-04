@@ -8,15 +8,15 @@ spring:
     allow-circular-references: true
   datasource:
     druid:
-      driver-class-name: ${sky.datasource.driver-class-name}
-      url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-      username: ${sky.datasource.username}
-      password: ${sky.datasource.password}
+      driver-class-name: ${VinoHouse.datasource.driver-class-name}
+      url: jdbc:mysql://${VinoHouse.datasource.host}:${VinoHouse.datasource.port}/${VinoHouse.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${VinoHouse.datasource.username}
+      password: ${VinoHouse.datasource.password}
 
 mybatis:
   #mapper配置文件
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.sky.entity
+  type-aliases-package: com.VinoHouse.entity
   configuration:
     #开启驼峰命名
     map-underscore-to-camel-case: true
@@ -24,12 +24,12 @@ mybatis:
 logging:
   level:
     com:
-      sky:
+      VinoHouse:
         mapper: debug
         service: info
         controller: info
 
-sky:
+vino-house:  # 与 JwtProperties 中的 @ConfigurationProperties 保持一致
   jwt:
     # 设置jwt签名加密时使用的秘钥
     admin-secret-key: itcast

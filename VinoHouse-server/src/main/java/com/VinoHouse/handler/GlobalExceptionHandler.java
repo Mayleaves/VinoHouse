@@ -15,8 +15,6 @@ public class GlobalExceptionHandler {
 
     /**
      * 捕获业务异常
-     * @param ex
-     * @return
      */
     @ExceptionHandler
     public Result exceptionHandler(BaseException ex){
