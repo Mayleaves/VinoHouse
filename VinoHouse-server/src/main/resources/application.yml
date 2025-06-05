@@ -14,11 +14,11 @@ spring:
       password: ${VinoHouse.datasource.password}
 
 mybatis:
-  #mapper配置文件
+  # mapper配置文件
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.VinoHouse.entity
   configuration:
-    #开启驼峰命名
+    # 开启驼峰命名
     map-underscore-to-camel-case: true
 
 logging:
@@ -29,7 +29,7 @@ logging:
         service: info
         controller: info
 
-vino-house:  # 与 JwtProperties 中的 @ConfigurationProperties 保持一致
+vino-house: # 与 JwtProperties 中的 @ConfigurationProperties 保持一致
   jwt:
     # 设置jwt签名加密时使用的秘钥
     admin-secret-key: itcast

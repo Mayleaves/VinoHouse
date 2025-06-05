@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * 封装前端传递的参数列表
+ */
 @Data
 public class EmployeeDTO implements Serializable {
 

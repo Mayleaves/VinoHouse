@@ -1,6 +1,7 @@
 package com.VinoHouse.controller.admin;
 
 import com.VinoHouse.constant.JwtClaimsConstant;
+import com.VinoHouse.dto.EmployeeDTO;
 import com.VinoHouse.dto.EmployeeLoginDTO;
 import com.VinoHouse.entity.Employee;
 import com.VinoHouse.properties.JwtProperties;
@@ -68,6 +69,18 @@ public class EmployeeController {
     @PostMapping("/logout")
     @ApiOperation("员工退出")
     public Result<String> logout() {
+        return Result.success();
+    }
+
+    /**
+     * 新增员工
+     */
+    @PostMapping
+    @ApiOperation("新增员工")
+    public Result save(@RequestBody EmployeeDTO employeeDTO){
+        log.info("新增员工：{}", employeeDTO);
+        System.out.println("当前线程 id：" + Thread.currentThread().getId());
+        employeeService.save(employeeDTO);
         return Result.success();
     }
 
