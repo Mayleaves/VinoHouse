@@ -37,4 +37,10 @@ public interface EmployeeMapper {
      */
 //    @AutoFill(value = OperationType.UPDATE)
     void update(Employee employee);
+
+    /**
+     * 根据 id 查询员工信息
+     */
+    @Select("select * from employee where id = #{id}")
+    Employee getById(Long id);
 }
