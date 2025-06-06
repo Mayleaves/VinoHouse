@@ -27,9 +27,14 @@ public interface EmployeeMapper {
 //    @AutoFill(value = OperationType.INSERT)
     void insert(Employee employee);
 
-
     /**
      * 分页查询：动态 SQL
      */
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 根据主键动态修改属性
+     */
+//    @AutoFill(value = OperationType.UPDATE)
+    void update(Employee employee);
 }

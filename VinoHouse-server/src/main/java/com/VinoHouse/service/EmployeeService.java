@@ -22,4 +22,9 @@ public interface EmployeeService {
      * 分页查询
      */
     PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 启用、禁用员工账号
+     */
+    void startOrStop(Integer status, Long id);
 }

@@ -73,10 +73,11 @@ public class EmployeeController {
 
     /**
      * 新增员工：json
+     * 非查询操作可以不写泛型 Result<T>，因为写了返回值也是空。
      */
     @PostMapping
     @ApiOperation("新增员工")
-    public Result save(@RequestBody EmployeeDTO employeeDTO){
+    public Result save(@RequestBody EmployeeDTO employeeDTO) {
         log.info("新增员工：{}", employeeDTO);
         System.out.println("当前线程 id：" + Thread.currentThread().getId());
         employeeService.save(employeeDTO);
@@ -88,9 +89,21 @@ public class EmployeeController {
      */
     @GetMapping("/page")
     @ApiOperation("员工分页查询")
-    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
         log.info("员工分页查询，参数为：{}", employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 启用、禁用员工账号
+     * 路径参数需要 @PathVariable 修饰。
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用禁用员工账号")
+    public Result startOrStop(@PathVariable Integer status, Long id) {
+        log.info("启用、禁用员工账号：{}，{}", status, id);
+        employeeService.startOrStop(status, id);
+        return Result.success();
     }
 }
