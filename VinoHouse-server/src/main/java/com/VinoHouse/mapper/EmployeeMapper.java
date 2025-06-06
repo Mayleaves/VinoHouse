@@ -1,16 +1,18 @@
 package com.VinoHouse.mapper;
 
+import com.VinoHouse.dto.EmployeePageQueryDTO;
 import com.VinoHouse.entity.Employee;
 import com.VinoHouse.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import com.github.pagehelper.Page;
 
 @Mapper
 public interface EmployeeMapper {
 
     /**
-     * 根据用户名查询员工
+     * 根据用户名查询员工：注解实现 SQL
      */
     @Select("select * from employee where username = #{username}")
     Employee getByUsername(String username);
@@ -24,4 +26,10 @@ public interface EmployeeMapper {
             "(#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{createTime},#{updateTime},#{createUser},#{updateUser},#{status})")
 //    @AutoFill(value = OperationType.INSERT)
     void insert(Employee employee);
+
+
+    /**
+     * 分页查询：动态 SQL
+     */
+    Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 }

@@ -6,18 +6,23 @@ import com.VinoHouse.constant.StatusConstant;
 import com.VinoHouse.context.BaseContext;
 import com.VinoHouse.dto.EmployeeDTO;
 import com.VinoHouse.dto.EmployeeLoginDTO;
+import com.VinoHouse.dto.EmployeePageQueryDTO;
 import com.VinoHouse.entity.Employee;
 import com.VinoHouse.exception.AccountLockedException;
 import com.VinoHouse.exception.AccountNotFoundException;
 import com.VinoHouse.exception.PasswordErrorException;
 import com.VinoHouse.mapper.EmployeeMapper;
+import com.VinoHouse.result.PageResult;
 import com.VinoHouse.service.EmployeeService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -84,5 +89,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setUpdateUser(BaseContext.getCurrentId());
 
         employeeMapper.insert(employee);
+    }
+
+    /**
+     * 分页查询：底层是基于 MySQL 的 limit 关键字实现分页查询
+     */
+    public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
+        // select * from employee limit 0,10
+        //开始分页查询
+        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
+
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
+
+        long total = page.getTotal();
+        List<Employee> records = page.getResult();
+
+        return new PageResult(total, records);
     }
 }
