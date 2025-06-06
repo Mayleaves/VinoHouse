@@ -1,5 +1,6 @@
 package com.VinoHouse.mapper;
 
+import com.VinoHouse.annotation.AutoFill;
 import com.github.pagehelper.Page;
 import com.VinoHouse.enumeration.OperationType;
 import com.VinoHouse.dto.CategoryPageQueryDTO;
@@ -18,6 +19,7 @@ public interface CategoryMapper {
     @Insert("insert into category(type, name, sort, status, create_time, update_time, create_user, update_user)" +
             " VALUES" +
             " (#{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
+    @AutoFill(value = OperationType.INSERT)
     void insert(Category category);
 
     /**
@@ -34,6 +36,7 @@ public interface CategoryMapper {
     /**
      * 根据 id 修改分类
      */
+    @AutoFill(value = OperationType.UPDATE)
     void update(Category category);
 
     /**
