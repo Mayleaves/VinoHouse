@@ -8,24 +8,25 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * 菜品口味
+ * 酒水口味
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DishFlavor implements Serializable {
+public class BeverageFlavor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    //菜品id
-    private Long dishId;
 
-    //口味名称
+    // 酒水id
+    private Long beverageId;
+
+    // 口味名称
     private String name;
 
-    //口味数据list
+    // 口味数据list
     private String value;
 
 }

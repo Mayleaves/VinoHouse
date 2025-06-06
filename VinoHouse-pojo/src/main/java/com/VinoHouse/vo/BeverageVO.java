@@ -1,6 +1,6 @@
 package com.VinoHouse.vo;
 
-import com.VinoHouse.entity.DishFlavor;
+import com.VinoHouse.entity.BeverageFlavor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,27 +15,27 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DishVO implements Serializable {
+public class BeverageVO implements Serializable {
 
     private Long id;
-    //菜品名称
+    // 酒水名称
     private String name;
-    //菜品分类id
+    // 酒水分类id
     private Long categoryId;
-    //菜品价格
+    // 酒水价格
     private BigDecimal price;
-    //图片
+    // 图片
     private String image;
-    //描述信息
+    // 描述信息
     private String description;
-    //0 停售 1 起售
+    // 0停售 1起售
     private Integer status;
-    //更新时间
+    // 更新时间
     private LocalDateTime updateTime;
-    //分类名称
+    // 分类名称
     private String categoryName;
-    //菜品关联的口味
-    private List<DishFlavor> flavors = new ArrayList<>();
+    // 酒水关联的口味
+    private List<BeverageFlavor> flavors = new ArrayList<>();
 
     //private Integer copies;
 }

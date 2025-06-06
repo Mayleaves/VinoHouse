@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 public class JwtProperties {
 
     /**
-     * 管理端员工生成jwt令牌相关配置
+     * 管理端员工生成 jwt 令牌相关配置
      */
     private String adminSecretKey;
     private long adminTtl;  // 过期时间
     private String adminTokenName;
 
     /**
-     * 用户端微信用户生成jwt令牌相关配置
+     * 用户端微信用户生成 jwt 令牌相关配置
      */
     private String userSecretKey;
     private long userTtl;

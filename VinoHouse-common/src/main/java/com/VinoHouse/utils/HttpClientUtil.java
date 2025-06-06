@@ -28,10 +28,7 @@ public class HttpClientUtil {
     static final  int TIMEOUT_MSEC = 5 * 1000;
 
     /**
-     * 发送GET方式请求
-     * @param url
-     * @param paramMap
-     * @return
+     * 发送 GET 方式请求
      */
     public static String doGet(String url,Map<String,String> paramMap){
         // 创建Httpclient对象
@@ -74,11 +71,7 @@ public class HttpClientUtil {
     }
 
     /**
-     * 发送POST方式请求
-     * @param url
-     * @param paramMap
-     * @return
-     * @throws IOException
+     * 发送 POST 方式请求
      */
     public static String doPost(String url, Map<String, String> paramMap) throws IOException {
         // 创建Httpclient对象
@@ -121,11 +114,7 @@ public class HttpClientUtil {
     }
 
     /**
-     * 发送POST方式请求
-     * @param url
-     * @param paramMap
-     * @return
-     * @throws IOException
+     * 发送 POST 方式请求
      */
     public static String doPost4Json(String url, Map<String, String> paramMap) throws IOException {
         // 创建Httpclient对象

@@ -73,7 +73,7 @@ public class CategoryServiceImpl implements CategoryService {
         Integer count = beverageMapper.countByCategoryId(id);
         if(count > 0){
             // 当前分类下有酒水，不能删除
-            throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_DISH);
+            throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_BEVERAGE);
         }
 
         // 查询当前分类是否关联了套餐，如果关联了就抛出业务异常

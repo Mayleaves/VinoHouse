@@ -9,34 +9,34 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * 菜品
+ * 酒水
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Dish implements Serializable {
+public class Beverage implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    //菜品名称
+    // 酒水名称
     private String name;
 
-    //菜品分类id
+    // 酒水分类 id
     private Long categoryId;
 
-    //菜品价格
+    // 酒水价格
     private BigDecimal price;
 
-    //图片
+    // 图片
     private String image;
 
-    //描述信息
+    // 描述信息
     private String description;
 
-    //0 停售 1 起售
+    // 0停售 1起售
     private Integer status;
 
     private LocalDateTime createTime;
