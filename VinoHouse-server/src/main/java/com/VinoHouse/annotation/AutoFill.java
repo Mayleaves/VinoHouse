@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 /**
  * 自定义注解，用于标识某个方法需要进行功能字段自动填充处理
  */
-@Target(ElementType.METHOD)
+@Target(ElementType.METHOD)  // 只能加在方法上
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AutoFill {
 

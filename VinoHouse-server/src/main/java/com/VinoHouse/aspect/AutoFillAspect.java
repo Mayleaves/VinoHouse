@@ -18,13 +18,15 @@ import java.time.LocalDateTime;
 /**
  * 自定义切面，实现公共字段自动填充处理逻辑
  */
-@Aspect
+@Aspect  // 切面注解
 @Component
 @Slf4j
 public class AutoFillAspect {
 
     /**
      * 切入点
+     * execution：mapper 下的所有类、方法，
+     * 并且 @annotation：要有 AutoFill 注解。
      */
     @Pointcut("execution(* com.VinoHouse.mapper.*.*(..)) && @annotation(com.VinoHouse.annotation.AutoFill)")
     public void autoFillPointCut(){}
@@ -41,13 +43,13 @@ public class AutoFillAspect {
         AutoFill autoFill = signature.getMethod().getAnnotation(AutoFill.class);  // 获得方法上的注解对象
         OperationType operationType = autoFill.value();  // 获得数据库操作类型
 
-        // 获取到当前被拦截的方法的参数 - 实体对象
+        // 获取到当前被拦截的方法的参数 - 实体对象。
         Object[] args = joinPoint.getArgs();
         if(args == null || args.length == 0){
             return;
         }
 
-        Object entity = args[0];
+        Object entity = args[0];  // 约定实体对象是第一个参数。
 
         // 准备赋值的数据
         LocalDateTime now = LocalDateTime.now();
