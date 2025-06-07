@@ -94,12 +94,14 @@
                 <version>${jjwt}</version>
             </dependency>
 
+            <!-- OSS Java SDK -->
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
                 <version>${aliyun.sdk.oss}</version>
             </dependency>
 
+            <!-- Java 9及以上的版本，OSS 需要添加 JAXB 相关依赖 -->
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>

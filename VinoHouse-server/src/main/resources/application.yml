@@ -3,15 +3,15 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: dev  # 设置环境
   main:
     allow-circular-references: true
   datasource:
     druid:
-      driver-class-name: ${VinoHouse.datasource.driver-class-name}
-      url: jdbc:mysql://${VinoHouse.datasource.host}:${VinoHouse.datasource.port}/${VinoHouse.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-      username: ${VinoHouse.datasource.username}
-      password: ${VinoHouse.datasource.password}
+      driver-class-name: ${vino-house.datasource.driver-class-name}
+      url: jdbc:mysql://${vino-house.datasource.host}:${vino-house.datasource.port}/${vino-house.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${vino-house.datasource.username}
+      password: ${vino-house.datasource.password}
 
 mybatis:
   # mapper配置文件
@@ -37,3 +37,8 @@ vino-house: # 与 JwtProperties 中的 @ConfigurationProperties 保持一致
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+  alioss:
+    endpoint: ${vino-house.alioss.endpoint}
+    access-key-id: ${vino-house.alioss.access-key-id}
+    access-key-secret: ${vino-house.alioss.access-key-secret}
+    bucket-name: ${vino-house.alioss.bucket-name}
