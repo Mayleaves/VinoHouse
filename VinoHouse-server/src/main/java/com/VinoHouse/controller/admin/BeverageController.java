@@ -99,20 +99,21 @@ public class BeverageController {
 
         return Result.success();
     }
-//
-//    /**
-//     * 酒水起售停售
-//     */
-//    @PostMapping("/status/{status}")
-//    @ApiOperation("酒水起售停售")
-//    public Result<String> startOrStop(@PathVariable Integer status, Long id) {
-//        beverageService.startOrStop(status, id);
-//
-//        // 将所有的酒水缓存数据清理掉：所有以 beverage_ 开头的 key
+
+    /**
+     * 酒水起售、停售
+     * Long id 中的 id 不能修改名字
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("酒水起售停售")
+    public Result<String> startOrStop(@PathVariable Integer status, Long id) {
+        beverageService.startOrStop(status, id);
+
+        // 将所有的酒水缓存数据清理掉：所有以 beverage_ 开头的 key
 //        cleanCache("beverage_*");
-//
-//        return Result.success();
-//    }
+
+        return Result.success();
+    }
 //
 //    /**
 //     * 根据分类 id 查询酒水

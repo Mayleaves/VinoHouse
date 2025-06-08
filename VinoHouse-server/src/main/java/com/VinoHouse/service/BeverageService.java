@@ -36,7 +36,7 @@ public interface BeverageService {
     void updateWithFlavor(BeverageDTO beverageDTO);
 
     /**
-     * 酒水起售停售
+     * 酒水起售、停售
      */
     void startOrStop(Integer status, Long id);
 

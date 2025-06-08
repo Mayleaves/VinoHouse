@@ -242,6 +242,11 @@ CREATE TABLE `setmeal` (
     UNIQUE KEY `idx_setmeal_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='套餐';
 
+-- 插入套餐数据
+INSERT INTO `setmeal` VALUES
+    (23, 13, '欢乐时光双人套餐', 108.00, 1, '包含1杯莓果乐园+1杯夏日微风+1份香辣鸡翅', 'https://vino-house.oss-cn-shanghai.aliyuncs.com/4fa68744-2fd0-4154-a069-67b0bd2b22fa.jpg', '2023-11-25 12:07:45','2024-01-08 19:04:38', 1, 1),
+    (24, 15, 'VIP尊享品鉴套餐', 888.00, 1, '包含1杯纳帕谷赤霞珠+1杯马爹利蓝带+1杯麦卡伦12年+1份芝士拼盘', 'https://vino-house.oss-cn-shanghai.aliyuncs.com/8874fbee-2046-4a31-b212-10c916581a20.jpg', '2023-12-05 17:49:21','2024-01-13 21:18:53', 1, 1);
+
 -- 套餐酒水关系表
 DROP TABLE IF EXISTS `setmeal_beverage`;
 CREATE TABLE `setmeal_beverage` (
@@ -253,6 +258,16 @@ CREATE TABLE `setmeal_beverage` (
     `copies` int DEFAULT NULL COMMENT '酒水份数',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='套餐酒水关系';
+
+-- 插入套餐酒水数据
+INSERT INTO `setmeal_beverage` VALUES
+    (11, 23, 52, '莓果乐园', 42.00, 1),
+    (12, 23, 51, '夏日微风', 38.00, 1),
+    (13, 23, 68, '香辣鸡翅', 48.00, 1),
+    (14, 24, 64, '纳帕谷赤霞珠', 358.00, 1),
+    (15, 24, 59, '马爹利蓝带', 388.00, 1),
+    (16, 24, 49, '麦卡伦12年', 128.00, 1),
+    (17, 24, 69, '芝士拼盘', 88.00, 1);
 
 -- 购物车表
 DROP TABLE IF EXISTS `shopping_cart`;
