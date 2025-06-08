@@ -73,32 +73,32 @@ public class BeverageController {
 
         return Result.success();
     }
-//
-//    /**
-//     * 根据 id 查询酒水
-//     */
-//    @GetMapping("/{id}")
-//    @ApiOperation("根据 id 查询酒水")
-//    public Result<BeverageVO> getById(@PathVariable Long id) {
-//        log.info("根据 id 查询酒水：{}", id);
-//        BeverageVO beverageVO = beverageService.getByIdWithFlavor(id);
-//        return Result.success(beverageVO);
-//    }
-//
-//    /**
-//     * 修改酒水
-//     */
-//    @PutMapping
-//    @ApiOperation("修改酒水")
-//    public Result update(@RequestBody BeverageDTO beverageDTO) {
-//        log.info("修改酒水：{}", beverageDTO);
-//        beverageService.updateWithFlavor(beverageDTO);
-//
-//        // 将所有的酒水缓存数据清理掉：所有以 beverage_ 开头的 key
+
+    /**
+     * 根据 id 查询酒水
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据 id 查询酒水")
+    public Result<BeverageVO> getById(@PathVariable Long id) {
+        log.info("根据 id 查询酒水：{}", id);
+        BeverageVO beverageVO = beverageService.getByIdWithFlavor(id);
+        return Result.success(beverageVO);
+    }
+
+    /**
+     * 修改酒水
+     */
+    @PutMapping
+    @ApiOperation("修改酒水")
+    public Result update(@RequestBody BeverageDTO beverageDTO) {
+        log.info("修改酒水：{}", beverageDTO);
+        beverageService.updateWithFlavor(beverageDTO);
+
+        // 将所有的酒水缓存数据清理掉：所有以 beverage_ 开头的 key
 //        cleanCache("beverage_*");
-//
-//        return Result.success();
-//    }
+
+        return Result.success();
+    }
 //
 //    /**
 //     * 酒水起售停售
