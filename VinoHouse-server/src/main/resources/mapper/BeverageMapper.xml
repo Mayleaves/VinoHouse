@@ -26,6 +26,13 @@
         order by d.create_time desc
     </select>
 
+    <delete id="deleteByIds">
+        delete from beverage where id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
     <update id="update">
         update beverage
         <set>

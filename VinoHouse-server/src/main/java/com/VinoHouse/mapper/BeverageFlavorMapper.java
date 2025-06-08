@@ -22,6 +22,11 @@ public interface BeverageFlavorMapper {
     void deleteByBeverageId(Long beverageId);
 
     /**
+     * 根据酒水 id 集合批量删除关联的口味数据
+     */
+    void deleteByBeverageIds(List<Long> beverageIds);
+
+    /**
      * 根据酒水 id 查询对应的口味数据
      */
     @Select("select * from beverage_flavor where beverage_id = #{beverageId}")

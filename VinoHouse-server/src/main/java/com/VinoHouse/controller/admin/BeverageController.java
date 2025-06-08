@@ -59,20 +59,20 @@ public class BeverageController {
         return Result.success(pageResult);
     }
 
-//    /**
-//     * 酒水批量删除
-//     */
-//    @DeleteMapping
-//    @ApiOperation("酒水批量删除")
-//    public Result delete(@RequestParam List<Long> ids) {
-//        log.info("酒水批量删除：{}", ids);
-//        beverageService.deleteBatch(ids);
-//
-//        // 将所有的酒水缓存数据清理掉：所有以 beverage_ 开头的 key
+    /**
+     * 酒水批量删除：批量删除和单个删除共用一个接口
+     */
+    @DeleteMapping
+    @ApiOperation("酒水批量删除")
+    public Result delete(@RequestParam List<Long> ids) {
+        log.info("酒水批量删除：{}", ids);
+        beverageService.deleteBatch(ids);
+
+        // 将所有的酒水缓存数据清理掉：所有以 beverage_ 开头的 key
 //        cleanCache("beverage_*");
-//
-//        return Result.success();
-//    }
+
+        return Result.success();
+    }
 //
 //    /**
 //     * 根据 id 查询酒水

@@ -16,6 +16,7 @@ import com.VinoHouse.result.PageResult;
 import com.VinoHouse.service.EmployeeService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
@@ -67,7 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * 新增员工
      */
     public void save(EmployeeDTO employeeDTO) {
-        System.out.println("当前线程 id：" + Thread.currentThread().getId());
+        log.info("当前线程 id：" + Thread.currentThread().getId());
         Employee employee = new Employee();
 
         // 对象属性拷贝：employeeDTO → employee

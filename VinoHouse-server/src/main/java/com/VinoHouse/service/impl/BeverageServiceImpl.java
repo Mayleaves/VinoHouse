@@ -96,12 +96,19 @@ public class BeverageServiceImpl implements BeverageService {
             throw new DeletionNotAllowedException(MessageConstant.BEVERAGE_BE_RELATED_BY_SETMEAL);
         }
 
+        // 1. 多条 SQL 语句
         // 删除酒水表中的酒水数据
-        for (Long id : ids) {
-            beverageMapper.deleteById(id);
-            // 删除酒水关联的口味数据
-            beverageFlavorMapper.deleteByBeverageId(id);
-        }
+//        for (Long id : ids) {
+//            beverageMapper.deleteById(id);
+//            // 删除酒水关联的口味数据
+//            beverageFlavorMapper.deleteByBeverageId(id);
+//        }
+
+        // 2. 一条 SQL 语句
+        // 根据酒水 id 集合批量删除酒水数据：delete from beverage where id in(?,?,?)
+        beverageMapper.deleteByIds(ids);
+        // 根据酒水 id 集合批量删除关联的口味数据：delete from beverage_flavor where beverage_id in(?,?,?)
+        beverageFlavorMapper.deleteByBeverageIds(ids);
     }
 
     /**
