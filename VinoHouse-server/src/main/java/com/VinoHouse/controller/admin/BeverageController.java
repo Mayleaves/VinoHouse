@@ -32,7 +32,8 @@ public class BeverageController {
     private RedisTemplate redisTemplate;
 
     /**
-     * 新增酒水
+     * 新增酒水：
+     * json：需要 @RequestBody
      */
     @PostMapping
     @ApiOperation("新增酒水")
@@ -46,17 +47,18 @@ public class BeverageController {
         return Result.success();
     }
 
-//    /**
-//     * 酒水分页查询
-//     */
-//    @GetMapping("/page")
-//    @ApiOperation("酒水分页查询")
-//    public Result<PageResult> page(BeveragePageQueryDTO beveragePageQueryDTO) {
-//        log.info("酒水分页查询:{}", beveragePageQueryDTO);
-//        PageResult pageResult = beverageService.pageQuery(beveragePageQueryDTO);
-//        return Result.success(pageResult);
-//    }
-//
+    /**
+     * 酒水分页查询
+     * Query：不需要 @RequestBody
+     */
+    @GetMapping("/page")
+    @ApiOperation("酒水分页查询")
+    public Result<PageResult> page(BeveragePageQueryDTO beveragePageQueryDTO) {
+        log.info("酒水分页查询:{}", beveragePageQueryDTO);
+        PageResult pageResult = beverageService.pageQuery(beveragePageQueryDTO);
+        return Result.success(pageResult);
+    }
+
 //    /**
 //     * 酒水批量删除
 //     */
