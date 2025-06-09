@@ -11,3 +11,8 @@ vino-house:
     access-key-id: LTAI5t**********  # 敏感信息
     access-key-secret: h0sUty**********  # 敏感信息
     bucket-name: vino-house
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 10

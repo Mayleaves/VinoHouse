@@ -80,7 +80,6 @@ public class SetmealServiceImpl implements SetmealService {
     public PageResult pageQuery(SetmealPageQueryDTO setmealPageQueryDTO) {
         int pageNum = setmealPageQueryDTO.getPage();
         int pageSize = setmealPageQueryDTO.getPageSize();
-
         PageHelper.startPage(pageNum, pageSize);
         Page<SetmealVO> page = setmealMapper.pageQuery(setmealPageQueryDTO);
         return new PageResult(page.getTotal(), page.getResult());
@@ -93,12 +92,11 @@ public class SetmealServiceImpl implements SetmealService {
     public void deleteBatch(List<Long> ids) {
         ids.forEach(id -> {
             Setmeal setmeal = setmealMapper.getById(id);
-            if (StatusConstant.ENABLE == setmeal.getStatus()) {
+            if (setmeal.getStatus() == StatusConstant.ENABLE) {
                 // 起售中的套餐不能删除
                 throw new DeletionNotAllowedException(MessageConstant.SETMEAL_ON_SALE);
             }
         });
-
         ids.forEach(setmealId -> {
             // 删除套餐表中的数据
             setmealMapper.deleteById(setmealId);
@@ -117,6 +115,8 @@ public class SetmealServiceImpl implements SetmealService {
 
     /**
      * 修改套餐
+     * setmeal 直接 update
+     * setmeal_beverage 先全部删除，然后重新插入
      */
     @Transactional
     public void update(SetmealDTO setmealDTO) {
@@ -142,21 +142,26 @@ public class SetmealServiceImpl implements SetmealService {
 
     /**
      * 套餐起售、停售
+     * 起售套餐时，判断套餐内是否有停售酒水，有停售酒水提示"套餐内包含未启售酒水，无法启售"
      */
     public void startOrStop(Integer status, Long id) {
-        // 起售套餐时，判断套餐内是否有停售酒水，有停售酒水提示"套餐内包含未启售酒水，无法启售"
+        // 停售 → 起售，判断套餐内是否有停售酒水，
         if (status == StatusConstant.ENABLE) {
+            // 套餐中的所有酒水
             // select a.* from beverage a left join setmeal_beverage b on a.id = b.beverage_id where b.setmeal_id = ?
             List<Beverage> beverageList = beverageMapper.getBySetmealId(id);
+            // 套餐中要有酒水
             if (beverageList != null && beverageList.size() > 0) {
                 beverageList.forEach(beverage -> {
-                    if (StatusConstant.DISABLE == beverage.getStatus()) {
+                    // 判断是否有停售酒水
+                    if (beverage.getStatus() == StatusConstant.DISABLE) {
+                        // 有停售酒水，提示"套餐内包含未启售酒水，无法启售"
                         throw new SetmealEnableFailedException(MessageConstant.SETMEAL_ENABLE_FAILED);
                     }
                 });
             }
         }
-
+        // 起售 → 停售，直接更新状态
         Setmeal setmeal = Setmeal.builder()
                 .id(id)
                 .status(status)

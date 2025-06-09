@@ -12,6 +12,11 @@ spring:
       url: jdbc:mysql://${vino-house.datasource.host}:${vino-house.datasource.port}/${vino-house.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${vino-house.datasource.username}
       password: ${vino-house.datasource.password}
+  redis:
+    host: ${vino-house.redis.host}
+    port: ${vino-house.redis.port}
+    password: ${vino-house.redis.password}
+    database: ${vino-house.redis.database}
 
 mybatis:
   # mapper配置文件
