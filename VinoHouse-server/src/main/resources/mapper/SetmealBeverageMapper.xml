@@ -13,7 +13,7 @@
     <insert id="insertBatch" parameterType="list">
         insert into setmeal_beverage (setmeal_id,beverage_id,name,price,copies)
         values
-        <foreach collection="setmealBeveragees" item="sd" separator=",">
+        <foreach collection="setmealBeverages" item="sd" separator=",">
             (#{sd.setmealId},#{sd.beverageId},#{sd.name},#{sd.price},#{sd.copies})
         </foreach>
     </insert>

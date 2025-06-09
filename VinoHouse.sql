@@ -244,8 +244,8 @@ CREATE TABLE `setmeal` (
 
 -- 插入套餐数据
 INSERT INTO `setmeal` VALUES
-    (23, 13, '欢乐时光双人套餐', 108.00, 1, '包含1杯莓果乐园+1杯夏日微风+1份香辣鸡翅', 'https://vino-house.oss-cn-shanghai.aliyuncs.com/4fa68744-2fd0-4154-a069-67b0bd2b22fa.jpg', '2023-11-25 12:07:45','2024-01-08 19:04:38', 1, 1),
-    (24, 15, 'VIP尊享品鉴套餐', 888.00, 1, '包含1杯纳帕谷赤霞珠+1杯马爹利蓝带+1杯麦卡伦12年+1份芝士拼盘', 'https://vino-house.oss-cn-shanghai.aliyuncs.com/8874fbee-2046-4a31-b212-10c916581a20.jpg', '2023-12-05 17:49:21','2024-01-13 21:18:53', 1, 1);
+    (23, 13, '辣翅CP双饮套餐', 108.00, 1, '包含1杯莓果乐园+1杯夏日微风+1份香辣鸡翅', 'https://vino-house.oss-cn-shanghai.aliyuncs.com/4fa68744-2fd0-4154-a069-67b0bd2b22fa.jpg', '2024-12-15 09:30:10', '2025-02-20 14:55:22', 1, 1),
+    (24, 15, '三酿芝士套餐', 888.00, 1, '包含1杯纳帕谷赤霞珠+1杯马爹利蓝带+1杯麦卡伦12年+1份芝士拼盘', 'https://vino-house.oss-cn-shanghai.aliyuncs.com/8874fbee-2046-4a31-b212-10c916581a20.jpg', '2023-09-17 03:41:28','2024-05-23 16:58:09', 1, 1);
 
 -- 套餐酒水关系表
 DROP TABLE IF EXISTS `setmeal_beverage`;

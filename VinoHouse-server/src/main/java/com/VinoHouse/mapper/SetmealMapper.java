@@ -57,21 +57,21 @@ public interface SetmealMapper {
      */
     SetmealVO getByIdWithBeverage(Long id);
 
-    /**
-     * 动态条件查询套餐
-     */
-    List<Setmeal> list(Setmeal setmeal);
-
-    /**
-     * 根据套餐 id 查询酒水选项
-     */
-    @Select("select sd.name, sd.copies, d.image, d.description " +
-            "from setmeal_beverage sd left join beverage d on sd.beverage_id = d.id " +
-            "where sd.setmeal_id = #{setmealId}")
-    List<BeverageItemVO> getBeverageItemBySetmealId(Long setmealId);
-
-    /**
-     * 根据条件统计套餐数量
-     */
-    Integer countByMap(Map map);
+//    /**
+//     * 动态条件查询套餐
+//     */
+//    List<Setmeal> list(Setmeal setmeal);
+//
+//    /**
+//     * 根据套餐 id 查询酒水选项
+//     */
+//    @Select("select sd.name, sd.copies, d.image, d.description " +
+//            "from setmeal_beverage sd left join beverage d on sd.beverage_id = d.id " +
+//            "where sd.setmeal_id = #{setmealId}")
+//    List<BeverageItemVO> getBeverageItemBySetmealId(Long setmealId);
+//
+//    /**
+//     * 根据条件统计套餐数量
+//     */
+//    Integer countByMap(Map map);
 }

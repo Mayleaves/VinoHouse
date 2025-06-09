@@ -1,6 +1,7 @@
 package com.VinoHouse.vo;
 
 import com.VinoHouse.entity.SetmealBeverage;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -44,5 +45,6 @@ public class SetmealVO implements Serializable {
     private String categoryName;
 
     // 套餐和酒水的关联关系
+    @JsonProperty("setmealDishes")  // 前端接收为“setmealDishes”，因此指定该字段在 JSON 中别名为 "setmealDishes"
     private List<SetmealBeverage> setmealBeverages = new ArrayList<>();
 }

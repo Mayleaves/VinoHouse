@@ -7,6 +7,7 @@ import com.VinoHouse.entity.Beverage;
 import com.VinoHouse.enumeration.OperationType;
 import com.VinoHouse.vo.BeverageVO;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

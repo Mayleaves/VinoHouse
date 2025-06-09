@@ -114,17 +114,17 @@ public class BeverageController {
 
         return Result.success();
     }
-//
-//    /**
-//     * 根据分类 id 查询酒水
-//     */
-//    @GetMapping("/list")
-//    @ApiOperation("根据分类 id 查询酒水")
-//    public Result<List<Beverage>> list(Long categoryId) {
-//        List<Beverage> list = beverageService.list(categoryId);
-//        return Result.success(list);
-//    }
-//
+
+    /**
+     * 根据分类 id 查询酒水
+     */
+    @GetMapping("/list")
+    @ApiOperation("根据分类 id 查询酒水")
+    public Result<List<Beverage>> list(Long categoryId) {
+        List<Beverage> list = beverageService.list(categoryId);
+        return Result.success(list);
+    }
+
 //    /**
 //     * 清理缓存数据
 //     */
