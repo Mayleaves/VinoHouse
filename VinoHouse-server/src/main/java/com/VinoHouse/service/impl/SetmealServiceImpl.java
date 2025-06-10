@@ -168,19 +168,19 @@ public class SetmealServiceImpl implements SetmealService {
                 .build();
         setmealMapper.update(setmeal);
     }
-//
-//    /**
-//     * 条件查询
-//     */
-//    public List<Setmeal> list(Setmeal setmeal) {
-//        List<Setmeal> list = setmealMapper.list(setmeal);
-//        return list;
-//    }
-//
-//    /**
-//     * 根据 id 查询酒水选项
-//     */
-//    public List<BeverageItemVO> getBeverageItemById(Long id) {
-//        return setmealMapper.getBeverageItemBySetmealId(id);
-//    }
+
+    /**
+     * 条件查询
+     */
+    public List<Setmeal> list(Setmeal setmeal) {
+        List<Setmeal> list = setmealMapper.list(setmeal);
+        return list;
+    }
+
+    /**
+     * 根据 id 查询酒水选项
+     */
+    public List<BeverageItemVO> getBeverageItemById(Long id) {
+        return setmealMapper.getBeverageItemBySetmealId(id);
+    }
 }

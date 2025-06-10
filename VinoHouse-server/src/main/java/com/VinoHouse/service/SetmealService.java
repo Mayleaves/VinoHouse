@@ -41,13 +41,13 @@ public interface SetmealService {
      */
     void startOrStop(Integer status, Long id);
 
-//    /**
-//     * 条件查询
-//     */
-//    List<Setmeal> list(Setmeal setmeal);
-//
-//    /**
-//     * 根据 id 查询酒水选项
-//     */
-//    List<BeverageItemVO> getBeverageItemById(Long id);
+    /**
+     * 条件查询
+     */
+    List<Setmeal> list(Setmeal setmeal);
+
+    /**
+     * 根据 id 查询酒水选项
+     */
+    List<BeverageItemVO> getBeverageItemById(Long id);
 }
