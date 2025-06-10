@@ -15,4 +15,7 @@ vino-house:
     host: localhost
     port: 6379
     password: 123456
-    database: 10
+    database: 10  # 一共 16 个，默认 0
+  wechat:
+    appid: wx1561e3829392b939
+    secret: 1ce5c30c4b349572432e551be53411ba

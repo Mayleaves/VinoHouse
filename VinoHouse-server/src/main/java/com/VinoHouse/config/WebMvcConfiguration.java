@@ -1,6 +1,7 @@
 package com.VinoHouse.config;
 
 import com.VinoHouse.interceptor.JwtTokenAdminInterceptor;
+import com.VinoHouse.interceptor.JwtTokenUserInterceptor;
 import com.VinoHouse.json.JacksonObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     @Autowired
     private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
 
+    @Autowired
+    private JwtTokenUserInterceptor jwtTokenUserInterceptor;
+
     /**
      * 注册自定义拦截器
      */
@@ -38,6 +42,11 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/employee/login");
+
+        registry.addInterceptor(jwtTokenUserInterceptor)
+                .addPathPatterns("/user/**")
+                .excludePathPatterns("/user/user/login")
+                .excludePathPatterns("/user/shop/status");
     }
 
     /**
