@@ -42,8 +42,8 @@ public class BeverageController {
         beverageService.saveWithFlavor(beverageDTO);
 
         // 清理缓存数据
-//        String key = "beverage_" + beverageDTO.getCategoryId();
-//        cleanCache(key);
+        String key = "beverage_" + beverageDTO.getCategoryId();
+        cleanCache(key);
         return Result.success();
     }
 
@@ -69,7 +69,7 @@ public class BeverageController {
         beverageService.deleteBatch(ids);
 
         // 将所有的酒水缓存数据清理掉：所有以 beverage_ 开头的 key
-//        cleanCache("beverage_*");
+        cleanCache("beverage_*");
 
         return Result.success();
     }
@@ -95,7 +95,7 @@ public class BeverageController {
         beverageService.updateWithFlavor(beverageDTO);
 
         // 将所有的酒水缓存数据清理掉：所有以 beverage_ 开头的 key
-//        cleanCache("beverage_*");
+        cleanCache("beverage_*");
 
         return Result.success();
     }
@@ -110,7 +110,7 @@ public class BeverageController {
         beverageService.startOrStop(status, id);
 
         // 将所有的酒水缓存数据清理掉：所有以 beverage_ 开头的 key
-//        cleanCache("beverage_*");
+        cleanCache("beverage_*");
 
         return Result.success();
     }
@@ -125,11 +125,11 @@ public class BeverageController {
         return Result.success(list);
     }
 
-//    /**
-//     * 清理缓存数据
-//     */
-//    private void cleanCache(String pattern){
-//        Set keys = redisTemplate.keys(pattern);
-//        redisTemplate.delete(keys);
-//    }
+    /**
+     * 清理缓存数据
+     */
+    private void cleanCache(String pattern){
+        Set keys = redisTemplate.keys(pattern);
+        redisTemplate.delete(keys);
+    }
 }

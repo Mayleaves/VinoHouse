@@ -22,6 +22,7 @@ public class CategoryController {
 
     /**
      * 查询分类
+     * type：1酒水分类、2套餐分类、无参所有分类
      */
     @GetMapping("/list")
     @ApiOperation("查询分类")
