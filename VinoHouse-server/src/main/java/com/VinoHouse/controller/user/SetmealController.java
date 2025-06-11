@@ -39,7 +39,7 @@ public class SetmealController {
     /**
      * 根据套餐 id 查询包含的酒水列表
      */
-    @GetMapping("/beverage/{id}")
+    @GetMapping("/dish/{id}")  // 现在这里不能修改，因为前端硬编码了 /dish/{id} 这个API路径
     @ApiOperation("根据套餐 id 查询包含的酒水列表")
     public Result<List<BeverageItemVO>> beverageList(@PathVariable("id") Long id) {
         List<BeverageItemVO> list = setmealService.getBeverageItemById(id);

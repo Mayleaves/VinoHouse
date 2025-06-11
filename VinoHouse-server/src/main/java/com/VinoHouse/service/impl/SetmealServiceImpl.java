@@ -60,7 +60,7 @@ public class SetmealServiceImpl implements SetmealService {
         List<SetmealBeverage> setmealBeverages = setmealDTO.getSetmealDishes();  // 这里的 getSetmealDishes 不能修改，要和前端保持一致 json
 
         setmealBeverages.forEach(setmealBeverage -> {
-            // 1. 设置酒水 ID：通过酒水 name 在 beverage 查找酒水 ID 赋值给 setmeal_beverage
+            // 设置酒水 ID：通过酒水 name 在 beverage 查找酒水 ID 赋值给 setmeal_beverage
             Beverage query = new Beverage();
             query.setName(setmealBeverage.getName());
             List<Beverage> beverages = beverageMapper.list(query); // 逐条查询
@@ -134,6 +134,12 @@ public class SetmealServiceImpl implements SetmealService {
 
         List<SetmealBeverage> setmealBeverages = setmealDTO.getSetmealDishes();
         setmealBeverages.forEach(setmealBeverage -> {
+            // 设置酒水 ID：通过酒水 name 在 beverage 查找酒水 ID 赋值给 setmeal_beverage
+            Beverage query = new Beverage();
+            query.setName(setmealBeverage.getName());
+            List<Beverage> beverages = beverageMapper.list(query); // 逐条查询
+            setmealBeverage.setBeverageId(beverages.get(0).getId());  // 名称唯一，取第一个结果
+            // 设置套餐 ID
             setmealBeverage.setSetmealId(setmealId);
         });
         // 3、重新插入套餐和酒水的关联关系，操作 setmeal_beverage 表，执行 insert
