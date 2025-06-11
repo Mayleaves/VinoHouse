@@ -32,15 +32,15 @@ public class ShoppingCartController {
         return Result.success();
     }
 
-//    /**
-//     * 查看购物车
-//     */
-//    @GetMapping("/list")
-//    @ApiOperation("查看购物车")
-//    public Result<List<ShoppingCart>> list() {
-//        List<ShoppingCart> list = shoppingCartService.showShoppingCart();
-//        return Result.success(list);
-//    }
+    /**
+     * 查看购物车
+     */
+    @GetMapping("/list")
+    @ApiOperation("查看购物车")
+    public Result<List<ShoppingCart>> list() {
+        List<ShoppingCart> list = shoppingCartService.showShoppingCart();
+        return Result.success(list);
+    }
 
 //    /**
 //     * 清空购物车
