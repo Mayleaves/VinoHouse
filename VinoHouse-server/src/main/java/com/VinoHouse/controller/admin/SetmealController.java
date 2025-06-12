@@ -30,6 +30,11 @@ public class SetmealController {
 
     /**
      * 新增套餐
+     *
+     * @CacheEvict 中的 key 有多种写法（SpEL）:
+     * 1. setmealDTO：获取形参中名为“setmealDTO”的值。代码中的写法。
+     * 2. result：获取 return 返回的值。
+     * 3. p0、a0、root.args[0]：获取第一个形参的值。
      */
     @PostMapping
     @ApiOperation("新增套餐")
@@ -55,7 +60,7 @@ public class SetmealController {
      */
     @DeleteMapping
     @ApiOperation("批量删除套餐")
-    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)  // 所有键值对 setmealCache::100
     public Result delete(@RequestParam List<Long> ids) {
         setmealService.deleteBatch(ids);
         return Result.success();

@@ -42,7 +42,7 @@ public class BeverageController {
         beverageService.saveWithFlavor(beverageDTO);
 
         // 清理缓存数据
-        String key = "beverage_" + beverageDTO.getCategoryId();
+        String key = "beverage_" + beverageDTO.getCategoryId();  // 指定某个酒水
         cleanCache(key);
         return Result.success();
     }
@@ -127,6 +127,7 @@ public class BeverageController {
 
     /**
      * 清理缓存数据
+     * 若不清理缓存，用户端访问的数据不会更新。因为用户端访问的是 redis，不会直接访问数据库
      */
     private void cleanCache(String pattern){
         Set keys = redisTemplate.keys(pattern);
