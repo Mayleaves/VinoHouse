@@ -226,7 +226,7 @@ public class OrderServiceImpl implements OrderService {
         // 查询该订单对应的酒水/套餐明细
         List<OrderDetail> orderDetailList = orderDetailMapper.getByOrderId(orders.getId());
 
-        // 将该订单及其详情封装到OrderVO并返回
+        // 将该订单及其详情封装到 OrderVO 并返回
         OrderVO orderVO = new OrderVO();
         BeanUtils.copyProperties(orders, orderVO);
         orderVO.setOrderDetailList(orderDetailList);
