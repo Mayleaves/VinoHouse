@@ -237,7 +237,7 @@ public class OrderServiceImpl implements OrderService {
     /**
      * 用户取消订单
      */
-    public void userCancelById(Long id) {
+    public void userCancelById(Long id) throws Exception{
         // 根据 id 查询订单
         Orders ordersDB = orderMapper.getById(id);
 
@@ -263,7 +263,7 @@ public class OrderServiceImpl implements OrderService {
 //                     new BigDecimal(0.01),  // 退款金额，单位 元
 //                     new BigDecimal(0.01)); // 原订单金额
 
-            // 支付状态修改为 退款
+            // 支付状态修改为退款
             orders.setPayStatus(Orders.REFUND);
         }
 
