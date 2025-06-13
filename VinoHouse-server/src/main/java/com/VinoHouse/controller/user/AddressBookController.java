@@ -94,7 +94,7 @@ public class AddressBookController {
         List<AddressBook> list = addressBookService.list(addressBook);
 
         if (list != null && list.size() == 1) {
-            return Result.success(list.get(0));
+            return Result.success(list.get(0));  // 只有一个默认地址，所以取第一个就行
         }
 
         return Result.error("没有查询到默认地址");

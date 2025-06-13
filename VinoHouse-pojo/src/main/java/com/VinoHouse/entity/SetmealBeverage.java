@@ -27,7 +27,7 @@ public class SetmealBeverage implements Serializable {
     // 酒水id
     private Long beverageId;
 
-    // 酒水名称 （冗余字段）
+    // 酒水名称 （冗余字段：空间换时间）
     private String name;
 
     // 酒水原价

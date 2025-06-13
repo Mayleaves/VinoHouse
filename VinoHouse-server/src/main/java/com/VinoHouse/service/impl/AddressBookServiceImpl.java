@@ -30,7 +30,7 @@ public class AddressBookServiceImpl implements AddressBookService {
      */
     public void save(AddressBook addressBook) {
         addressBook.setUserId(BaseContext.getCurrentId());
-        addressBook.setIsDefault(0);
+        addressBook.setIsDefault(0);  // 非默认地址
         addressBookMapper.insert(addressBook);
     }
 

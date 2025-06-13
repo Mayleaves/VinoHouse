@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
      * 分页查询
      */
     public PageResult pageQuery(CategoryPageQueryDTO categoryPageQueryDTO) {
-        PageHelper.startPage(categoryPageQueryDTO.getPage(),categoryPageQueryDTO.getPageSize());
+        PageHelper.startPage(categoryPageQueryDTO.getPage(), categoryPageQueryDTO.getPageSize());
         // 下一条 sql 进行分页，自动加入 limit 关键字分页
         Page<Category> page = categoryMapper.pageQuery(categoryPageQueryDTO);
         return new PageResult(page.getTotal(), page.getResult());
@@ -72,14 +73,14 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteById(Long id) {
         // 查询当前分类是否关联了酒水，如果关联了就抛出业务异常
         Integer count = beverageMapper.countByCategoryId(id);
-        if(count > 0){
+        if (count > 0) {
             // 当前分类下有酒水，不能删除
             throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_BEVERAGE);
         }
 
         // 查询当前分类是否关联了套餐，如果关联了就抛出业务异常
         count = setmealMapper.countByCategoryId(id);
-        if(count > 0){
+        if (count > 0) {
             // 当前分类下有酒水，不能删除
             throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_SETMEAL);
         }
@@ -93,7 +94,7 @@ public class CategoryServiceImpl implements CategoryService {
      */
     public void update(CategoryDTO categoryDTO) {
         Category category = new Category();
-        BeanUtils.copyProperties(categoryDTO,category);
+        BeanUtils.copyProperties(categoryDTO, category);
 
         // 已经通过 AutoFill 赋值
         // 设置修改时间、修改人

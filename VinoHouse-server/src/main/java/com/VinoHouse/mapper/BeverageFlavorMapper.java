@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface BeverageFlavorMapper {
-    
+
     /**
      * 批量插入口味数据
      */

@@ -22,7 +22,8 @@
     </select>
 
     <insert id="insertBatch" parameterType="list">
-        insert into shopping_cart (name, image, user_id, beverage_id, setmeal_id, beverage_flavor, number, amount, create_time)
+        insert into shopping_cart (name, image, user_id, beverage_id, setmeal_id, beverage_flavor, number, amount,
+        create_time)
         values
         <foreach collection="shoppingCartList" item="sc" separator=",">
             (#{sc.name},#{sc.image},#{sc.userId},#{sc.beverageId},#{sc.setmealId},#{sc.beverageFlavor},#{sc.number},#{sc.amount},#{sc.createTime})

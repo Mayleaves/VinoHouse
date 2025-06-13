@@ -203,7 +203,7 @@ public class BeverageServiceImpl implements BeverageService {
 
         for (Beverage d : beverageList) {
             BeverageVO beverageVO = new BeverageVO();
-            BeanUtils.copyProperties(d,beverageVO);
+            BeanUtils.copyProperties(d, beverageVO);
 
             // 根据酒水 id 查询对应的口味
             List<BeverageFlavor> flavors = beverageFlavorMapper.getByBeverageId(d.getId());

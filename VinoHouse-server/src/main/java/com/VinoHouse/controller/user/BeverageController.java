@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController("userBeverageController")  // 指定 Bean 名称
@@ -37,7 +38,7 @@ public class BeverageController {
 
         // 查询 redis 中是否存在酒水数据
         List<BeverageVO> list = (List<BeverageVO>) redisTemplate.opsForValue().get(key);
-        if(list != null && list.size() > 0){
+        if (list != null && list.size() > 0) {
             // 如果存在，直接返回，无须查询数据库
             return Result.success(list);
         }

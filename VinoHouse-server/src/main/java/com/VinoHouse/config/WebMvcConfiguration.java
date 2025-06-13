@@ -54,7 +54,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * 区分管理端（docket1）和用户端接口（docket2）
      */
     @Bean
-    public Docket docket1(){
+    public Docket docket1() {
         log.info("准备生成接口文档...");
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("万酒屋 VinoHouse 项目接口文档")
@@ -75,7 +75,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     }
 
     @Bean
-    public Docket docket2(){
+    public Docket docket2() {
         log.info("准备生成接口文档...");
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("万酒屋 VinoHouse 项目接口文档")
