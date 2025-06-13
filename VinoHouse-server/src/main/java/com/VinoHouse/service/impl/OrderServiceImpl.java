@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,18 +63,18 @@ public class OrderServiceImpl implements OrderService {
     /**
      * 用户下单
      */
-    @Transactional
+    @Transactional  // 事务注解：原子性
     public OrderSubmitVO submitOrder(OrdersSubmitDTO ordersSubmitDTO) {
-        // 异常情况的处理（收货地址为空、购物车为空）
+        // 1. 异常情况的处理
+        // 1.1 检查收货地址是否为空
         AddressBook addressBook = addressBookMapper.getById(ordersSubmitDTO.getAddressBookId());
         if (addressBook == null) {
             throw new AddressBookBusinessException(MessageConstant.ADDRESS_BOOK_IS_NULL);
         }
-        // 检查用户地址是否超过配送范围
+        // 1.2 检查用户地址是否超过配送范围
 //        checkOutOfRange(addressBook.getCityName() + addressBook.getDistrictName() + addressBook.getDetail());
-        // 查询当前用户的购物车数据
+        // 1.3 检查当前用户的购物车数据
         Long userId = BaseContext.getCurrentId();
-
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setUserId(userId);
         List<ShoppingCart> shoppingCartList = shoppingCartMapper.list(shoppingCart);
@@ -81,7 +82,7 @@ public class OrderServiceImpl implements OrderService {
             throw new ShoppingCartBusinessException(MessageConstant.SHOPPING_CART_IS_NULL);
         }
 
-        // 构造订单数据
+        // 2. 构造订单数据
         Orders order = new Orders();
         BeanUtils.copyProperties(ordersSubmitDTO, order);
         order.setPhone(addressBook.getPhone());
@@ -96,22 +97,22 @@ public class OrderServiceImpl implements OrderService {
         // 向订单表插入 1 条数据
         orderMapper.insert(order);
 
-        // 订单明细数据
+        // 3. 订单明细数据
         List<OrderDetail> orderDetailList = new ArrayList<>();
         for (ShoppingCart cart : shoppingCartList) {
-            OrderDetail orderDetail = new OrderDetail();
+            OrderDetail orderDetail = new OrderDetail();  // 订单明细
             BeanUtils.copyProperties(cart, orderDetail);
-            orderDetail.setOrderId(order.getId());
+            orderDetail.setOrderId(order.getId());  // 设置当前订单明细关联的订单 id
             orderDetailList.add(orderDetail);
         }
 
-        // 向明细表插入 n 条数据
+        // 向订单明细表插入 n 条数据
         orderDetailMapper.insertBatch(orderDetailList);
 
-        // 清理购物车中的数据
+        // 4. 清理购物车中的数据
         shoppingCartMapper.deleteByUserId(userId);
 
-        // 封装返回结果
+        // 5. 封装返回结果
         OrderSubmitVO orderSubmitVO = OrderSubmitVO.builder()
                 .id(order.getId())
                 .orderNumber(order.getNumber())
@@ -126,20 +127,19 @@ public class OrderServiceImpl implements OrderService {
      * 订单支付
      */
     public OrderPaymentVO payment(OrdersPaymentDTO ordersPaymentDTO) throws Exception {
+
+        /*// 1. 真实调用微信支付
         // 当前登录用户 id
         Long userId = BaseContext.getCurrentId();
         User user = userMapper.getById(userId);
-
-//         // 调用微信支付接口，生成预支付交易单
-//         JSONObject jsonObject = weChatPayUtil.pay(
-//                 ordersPaymentDTO.getOrderNumber(),  // 商户订单号
-//                 // 支付金额，单位 元
-//                 // 商品描述
-//                 // 微信用户的openid
-//                 new BigDecimal(0.01),
-//                 "万酒屋外卖订单",
-//                 user.getOpenid()
-//         );
+         // 调用微信支付接口，生成预支付交易单
+         JSONObject jsonObject = weChatPayUtil.pay(
+                 ordersPaymentDTO.getOrderNumber(),  // 商户订单号
+                 new BigDecimal(0.01), // 支付金额，单位：元
+                 "万酒屋外卖订单",  // 商品描述
+                 user.getOpenid()  // 微信用户的 openid
+         );*/
+        // 2. 模拟调用微信支付
         // 生成空 JSON，跳过微信支付流程
         JSONObject jsonObject = new JSONObject();
 
@@ -159,10 +159,10 @@ public class OrderServiceImpl implements OrderService {
     public void paySuccess(String outTradeNo) {
         // 当前登录用户 id
         Long userId = BaseContext.getCurrentId();
-        //  据订单号查询订单
+        // 据订单号查询订单
         Orders ordersDB = orderMapper.getByNumberAndUserId(outTradeNo, userId);
 
-        // 根据订单id更新订单的状态、支付方式、支付状态、结账时间
+        // 根据订单 id 更新订单的状态、支付方式、支付状态、结账时间
         Orders orders = Orders.builder()
                 .id(ordersDB.getId())
                 .status(Orders.TO_BE_CONFIRMED)
@@ -171,14 +171,14 @@ public class OrderServiceImpl implements OrderService {
                 .build();
 
         orderMapper.update(orders);
-        // 通过WebSocket向客户端浏览器推送消息type orderId content
-        Map map = new HashMap();
-        map.put("type", 1);
-        // 1表示来单提醒 2表示客户催单
-        map.put("orderId", ordersDB.getId());
-        map.put("content", "订单号" + outTradeNo);
-
-        String json = JSON.toJSONString(map);
+//        // 通过 WebSocket 向客户端浏览器推送消息 type orderId content
+//        Map map = new HashMap();
+//        map.put("type", 1);
+//        // 1表示来单提醒 2表示客户催单
+//        map.put("orderId", ordersDB.getId());
+//        map.put("content", "订单号" + outTradeNo);
+//
+//        String json = JSON.toJSONString(map);
 //        webSocketServer.sendToAllClient(json);
     }
 

@@ -19,3 +19,10 @@ vino-house:
   wechat:
     appid: wx1561e3829392b939
     secret: 1ce5c30c4b349572432e551be53411ba
+    mchid: 1561414331
+    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606
+    privateKeyFilePath: D:\DevelopmentTools\IDEA_WorkPlace\VinoHouse-take-out\apiclient_key.pem
+    apiV3Key: CZBK51236435wxpay435434323FFDuv3
+    weChatPayCertFilePath: D:\DevelopmentTools\IDEA_WorkPlace\VinoHouse-take-out\wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem
+    notifyUrl: https://2c5e343.r35.cpolar.top/notify/paySuccess  # 内网穿透、临时域名
+    refundNotifyUrl: https://2c5e343.r35.cpolar.top/notify/refundSuccess

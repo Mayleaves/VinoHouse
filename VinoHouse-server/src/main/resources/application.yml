@@ -48,5 +48,12 @@ vino-house: # 与 JwtProperties 中的 @ConfigurationProperties 保持一致
     access-key-secret: ${vino-house.alioss.access-key-secret}
     bucket-name: ${vino-house.alioss.bucket-name}
   wechat:
-    appid: ${vino-house.wechat.appid}
-    secret: ${vino-house.wechat.secret}
+    appid: ${vino-house.wechat.appid}  # 微信小程序 appid
+    secret: ${vino-house.wechat.secret}  # 微信小程序密钥
+    mchid: ${vino-house.wechat.mchid}  # 微信商户号
+    mchSerialNo: ${vino-house.wechat.mchSerialNo}  # 商户 API 证书序列号
+    privateKeyFilePath: ${vino-house.wechat.privateKeyFilePath}  # 商户私钥文件路径
+    apiV3Key: ${vino-house.wechat.apiV3Key}  # 证书解密密钥
+    weChatPayCertFilePath: ${vino-house.wechat.weChatPayCertFilePath}  # 证书文件路径
+    notifyUrl: ${vino-house.wechat.notifyUrl}  # 支付成功回调地址
+    refundNotifyUrl: ${vino-house.wechat.refundNotifyUrl}  # 退款成功回调地址

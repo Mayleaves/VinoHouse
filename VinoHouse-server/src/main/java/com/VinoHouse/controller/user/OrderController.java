@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("userOrderController")
+@RestController("userOrderController")  // 别名
 @RequestMapping("/user/order")
 @Api(tags = "用户端订单相关接口")
 @Slf4j
@@ -34,24 +34,24 @@ public class OrderController {
         return Result.success(ordersSubmitVO);
     }
 
-//    /**
-//     * 订单支付
-//     */
-//    @PutMapping("/payment")
-//    @ApiOperation("订单支付")
-//    public Result<OrderPaymentVO> payment(@RequestBody OrdersPaymentDTO ordersPaymentDTO) throws Exception {
-//        log.info("订单支付：{}", ordersPaymentDTO);
-//        OrderPaymentVO orderPaymentVO = orderService.payment(ordersPaymentDTO);
-//        log.info("生成预支付交易单：{}", orderPaymentVO);
-//
-//        // 业务处理,修改订单状态、来单状态
-//        // 因为无法调用微信支付接口,所以模拟一下
-//        orderService.paySuccess(ordersPaymentDTO.getOrderNumber());
-//        log.info("模拟交易成功:{}", ordersPaymentDTO.getOrderNumber());
-//
-//        return Result.success(orderPaymentVO);
-//    }
-//
+    /**
+     * 订单支付
+     */
+    @PutMapping("/payment")
+    @ApiOperation("订单支付")
+    public Result<OrderPaymentVO> payment(@RequestBody OrdersPaymentDTO ordersPaymentDTO) throws Exception {
+        log.info("订单支付：{}", ordersPaymentDTO);
+        OrderPaymentVO orderPaymentVO = orderService.payment(ordersPaymentDTO);
+        log.info("生成预支付交易单：{}", orderPaymentVO);
+
+        // 业务处理：修改订单状态、来单状态
+        // 模拟调用微信支付接口
+        orderService.paySuccess(ordersPaymentDTO.getOrderNumber());
+        log.info("模拟交易成功：{}", ordersPaymentDTO.getOrderNumber());
+
+        return Result.success(orderPaymentVO);
+    }
+
 //    /**
 //     * 历史订单查询
 //     *

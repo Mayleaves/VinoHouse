@@ -16,6 +16,7 @@ public interface OrderMapper {
 
     /**
      * 插入订单数据
+     * id="insert" parameterType="Orders"
      */
     void insert(Orders orders);
 
@@ -66,5 +67,5 @@ public interface OrderMapper {
     /**
      * 统计指定时间区间内的销量排名前 10
      */
-    List<GoodsSalesDTO> getSalesTop10(LocalDateTime begin,LocalDateTime end);
+    List<GoodsSalesDTO> getSalesTop10(LocalDateTime begin, LocalDateTime end);
 }
