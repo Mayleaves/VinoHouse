@@ -15,7 +15,7 @@ import java.util.List;
 public class OrderVO extends Orders implements Serializable {
 
     // 订单酒水信息
-    private String orderBeverages;
+    private String orderDishes;  // 前端硬编码，因此不能修改为 orderBeverages
 
     // 订单详情
     private List<OrderDetail> orderDetailList;

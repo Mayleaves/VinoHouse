@@ -314,6 +314,9 @@ public class OrderServiceImpl implements OrderService {
         return new PageResult(page.getTotal(), orderVOList);
     }
 
+    /**
+     * 获取视图对象(OrderVO)列表
+     */
     private List<OrderVO> getOrderVOList(Page<Orders> page) {
         // 需要返回订单酒水信息，自定义 OrderVO 响应结果
         List<OrderVO> orderVOList = new ArrayList<>();
@@ -327,7 +330,7 @@ public class OrderServiceImpl implements OrderService {
                 String orderBeverages = getOrderBeveragesStr(orders);
 
                 // 将订单酒水信息封装到 orderVO 中，并添加到 orderVOList
-                orderVO.setOrderBeverages(orderBeverages);
+                orderVO.setOrderDishes(orderBeverages);
                 orderVOList.add(orderVO);
             }
         }
@@ -341,7 +344,7 @@ public class OrderServiceImpl implements OrderService {
         // 查询订单酒水详情信息（订单中的酒水和数量）
         List<OrderDetail> orderDetailList = orderDetailMapper.getByOrderId(orders.getId());
 
-        // 将每一条订单酒水信息拼接为字符串（格式：马天尼*3；）
+        // 将每一条订单酒水信息拼接为字符串（格式：马天尼*3;）
         List<String> orderBeverageList = orderDetailList.stream().map(x -> {
             String orderBeverage = x.getName() + "*" + x.getNumber() + ";";
             return orderBeverage;
