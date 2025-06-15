@@ -57,3 +57,7 @@ vino-house: # 与 JwtProperties 中的 @ConfigurationProperties 保持一致
     weChatPayCertFilePath: ${vino-house.wechat.weChatPayCertFilePath}  # 证书文件路径
     notifyUrl: ${vino-house.wechat.notifyUrl}  # 支付成功回调地址
     refundNotifyUrl: ${vino-house.wechat.refundNotifyUrl}  # 退款成功回调地址
+  shop:
+    address: 上海市浦东新区陆家嘴
+  baidu:
+    ak: 1hybSH6Z56KGXXvbuIazkPXN5aNxY8rS

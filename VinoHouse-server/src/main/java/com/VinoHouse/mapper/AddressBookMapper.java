@@ -41,7 +41,7 @@ public interface AddressBookMapper {
     void deleteById(Long id);
 
     /**
-     * 根据 用户id修改 是否默认地址
+     * 根据用户 id 修改是否默认地址
      */
     @Update("update address_book set is_default = #{isDefault} where user_id = #{userId}")
     void updateIsDefaultByUserId(AddressBook addressBook);
