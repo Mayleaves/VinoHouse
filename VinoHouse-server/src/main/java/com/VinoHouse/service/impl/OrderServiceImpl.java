@@ -1,5 +1,6 @@
 package com.VinoHouse.service.impl;
 
+import com.VinoHouse.websocket.WebSocketServer;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -57,8 +58,8 @@ public class OrderServiceImpl implements OrderService {
     private AddressBookMapper addressBookMapper;
     @Autowired
     private WeChatPayUtil weChatPayUtil;
-//    @Autowired
-//    private WebSocketServer webSocketServer;
+    @Autowired
+    private WebSocketServer webSocketServer;
 
     /**
      * 用户下单
@@ -171,15 +172,15 @@ public class OrderServiceImpl implements OrderService {
                 .build();
 
         orderMapper.update(orders);
-//        // 通过 WebSocket 向客户端浏览器推送消息 type orderId content
-//        Map map = new HashMap();
-//        map.put("type", 1);
-//        // 1表示来单提醒 2表示客户催单
-//        map.put("orderId", ordersDB.getId());
-//        map.put("content", "订单号" + outTradeNo);
-//
-//        String json = JSON.toJSONString(map);
-//        webSocketServer.sendToAllClient(json);
+        // 通过 WebSocket 向客户端浏览器推送消息 type orderId content
+        Map map = new HashMap();
+        map.put("type", 1);
+        // 1表示来单提醒 2表示客户催单
+        map.put("orderId", ordersDB.getId());
+        map.put("content", "订单号" + outTradeNo);
+
+        String json = JSON.toJSONString(map);
+        webSocketServer.sendToAllClient(json);
     }
 
     /**
@@ -503,7 +504,7 @@ public class OrderServiceImpl implements OrderService {
         map.put("orderId", id);
         map.put("content", "订单号:" + ordersDB.getNumber());
         // 通过 websocke 向客户端浏览器来推送消息
-//        webSocketServer.sendToAllClient(JSON.toJSONString(map));
+        webSocketServer.sendToAllClient(JSON.toJSONString(map));
     }
 
     @Value("${vino-house.shop.address}")
