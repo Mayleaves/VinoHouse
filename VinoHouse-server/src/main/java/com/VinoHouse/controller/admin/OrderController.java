@@ -37,16 +37,16 @@ public class OrderController {
         return Result.success(pageResult);
     }
 
-//    /**
-//     * 各个状态的订单数量统计
-//     */
-//    @GetMapping("/statistics")
-//    @ApiOperation("各个状态的订单数量统计")
-//    public Result<OrderStatisticsVO> statistics() {
-//        OrderStatisticsVO orderStatisticsVO = orderService.statistics();
-//        return Result.success(orderStatisticsVO);
-//    }
-//
+    /**
+     * 各个状态的订单数量统计
+     */
+    @GetMapping("/statistics")
+    @ApiOperation("各个状态的订单数量统计")
+    public Result<OrderStatisticsVO> statistics() {
+        OrderStatisticsVO orderStatisticsVO = orderService.statistics();
+        return Result.success(orderStatisticsVO);
+    }
+
 //    /**
 //     * 订单详情
 //     */
