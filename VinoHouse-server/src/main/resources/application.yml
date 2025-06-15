@@ -37,7 +37,7 @@ logging:
 vino-house: # 与 JwtProperties 中的 @ConfigurationProperties 保持一致
   jwt:
     admin-secret-key: zms  # 设置 jwt 签名加密时使用的秘钥
-    admin-ttl: 7200000  # 设置jwt过期时间：2h
+    admin-ttl: 7200000  # 设置 jwt 过期时间：2h
     admin-token-name: token  # 设置前端传递过来的令牌名称
     user-secret-key: aq
     user-ttl: 7200000
