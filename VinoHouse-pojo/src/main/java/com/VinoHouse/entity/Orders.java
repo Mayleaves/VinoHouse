@@ -1,5 +1,7 @@
 package com.VinoHouse.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -82,6 +84,7 @@ public class Orders implements Serializable {
     private String consignee;
 
     // 订单取消原因
+    @JsonIgnore  // 忽略，准备动态生成
     private String cancelReason;
 
     // 订单拒绝原因
@@ -107,4 +110,16 @@ public class Orders implements Serializable {
 
     // 餐具数量状态  1按餐量提供  0选择具体数量
     private Integer tablewareStatus;
+
+    /**
+     * 动态生成前端需要的 cancelReason 字段（优先用 rejectionReason）
+     *
+     * 因为客户端订单管理 > 已取消 > 取消原因只显示 cancelReason 字段，为了能够显示 rejectionReason，因此做了如下修改
+     */
+    @JsonProperty("cancelReason")
+    public String getMergedCancelReason() {
+        return this.rejectionReason != null
+                ? this.rejectionReason  // 拒单原因
+                : this.cancelReason; // 如果 rejectionReason 为空，fallback 到 cancelReason
+    }
 }

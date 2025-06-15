@@ -436,7 +436,7 @@ public class OrderServiceImpl implements OrderService {
 //             log.info("申请退款：{}", refund);
         }
 
-        // 管理端取消订单需要退款，根据订单id更新订单状态、取消原因、取消时间
+        // 管理端取消订单需要退款，根据订单 id 更新订单状态、取消原因、取消时间
         Orders orders = new Orders();
         orders.setId(ordersCancelDTO.getId());
         orders.setStatus(Orders.CANCELLED);
