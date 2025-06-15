@@ -57,26 +57,26 @@ public class OrderController {
         return Result.success(orderVO);
     }
 
-//    /**
-//     * 接单
-//     */
-//    @PutMapping("/confirm")
-//    @ApiOperation("接单")
-//    public Result confirm(@RequestBody OrdersConfirmDTO ordersConfirmDTO) {
-//        orderService.confirm(ordersConfirmDTO);
-//        return Result.success();
-//    }
-//
-//    /**
-//     * 拒单
-//     */
-//    @PutMapping("/rejection")
-//    @ApiOperation("拒单")
-//    public Result rejection(@RequestBody OrdersRejectionDTO ordersRejectionDTO) throws Exception {
-//        orderService.rejection(ordersRejectionDTO);
-//        return Result.success();
-//    }
-//
+    /**
+     * 接单
+     */
+    @PutMapping("/confirm")
+    @ApiOperation("接单")
+    public Result confirm(@RequestBody OrdersConfirmDTO ordersConfirmDTO) {
+        orderService.confirm(ordersConfirmDTO);
+        return Result.success();
+    }
+
+    /**
+     * 拒单
+     */
+    @PutMapping("/rejection")
+    @ApiOperation("拒单")
+    public Result rejection(@RequestBody OrdersRejectionDTO ordersRejectionDTO) throws Exception {
+        orderService.rejection(ordersRejectionDTO);
+        return Result.success();
+    }
+
 //    /**
 //     * 取消订单
 //     */
