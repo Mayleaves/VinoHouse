@@ -177,7 +177,7 @@ public class OrderServiceImpl implements OrderService {
         map.put("type", 1);
         // 1表示来单提醒 2表示客户催单
         map.put("orderId", ordersDB.getId());
-        map.put("content", "订单号" + outTradeNo);
+        map.put("content", "订单号 " + outTradeNo);
 
         String json = JSON.toJSONString(map);
         webSocketServer.sendToAllClient(json);
@@ -496,13 +496,13 @@ public class OrderServiceImpl implements OrderService {
 
         // 校验订单是否存在
         if (ordersDB == null) {
-            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+            throw new OrderBusinessException(MessageConstant.ORDER_NOT_FOUND);
         }
         Map map = new HashMap();
         map.put("type", 2);
         // 1来单提醒 2客户接单
         map.put("orderId", id);
-        map.put("content", "订单号:" + ordersDB.getNumber());
+        map.put("content", "订单号 " + ordersDB.getNumber() + " ");
         // 通过 websocke 向客户端浏览器来推送消息
         webSocketServer.sendToAllClient(JSON.toJSONString(map));
     }

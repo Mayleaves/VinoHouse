@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * WebSocket服务
+ * WebSocket 服务：与客户端进行通信
  */
 @Component
-@ServerEndpoint("/ws/{sid}")
+@ServerEndpoint("/ws/{sid}")  // 类似 controller
 public class WebSocketServer {
 
     // 存放会话对象
@@ -25,7 +25,7 @@ public class WebSocketServer {
     /**
      * 连接建立成功调用的方法
      */
-    @OnOpen
+    @OnOpen  // 回调方法
     public void onOpen(Session session, @PathParam("sid") String sid) {
         System.out.println("客户端 " + sid + " 建立连接");
         sessionMap.put(sid, session);
@@ -36,7 +36,7 @@ public class WebSocketServer {
      *
      * @param message 客户端发送过来的消息
      */
-    @OnMessage
+    @OnMessage  // 回调方法
     public void onMessage(String message, @PathParam("sid") String sid) {
         System.out.println("收到来自客户端 " + sid + " 的信息：" + message);
     }
@@ -44,7 +44,7 @@ public class WebSocketServer {
     /**
      * 连接关闭调用的方法
      */
-    @OnClose
+    @OnClose  // 回调方法
     public void onClose(@PathParam("sid") String sid) {
         System.out.println("客户端 " + sid + " 连接断开");
         sessionMap.remove(sid);

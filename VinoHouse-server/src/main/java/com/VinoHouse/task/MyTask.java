@@ -16,7 +16,7 @@ public class MyTask {
     /**
      * 定时任务 每隔 5 秒触发一次
      */
-    //@Scheduled(cron = "0/5 * * * * ?")  // 这里仅作测试，因此注释掉
+    //@Scheduled(cron = "0/5 * * * * ?")  // 为了防止每次启动都运行，因此注释掉
     public void executeTask(){
         log.info("定时任务开始执行：{}", new Date());
     }
