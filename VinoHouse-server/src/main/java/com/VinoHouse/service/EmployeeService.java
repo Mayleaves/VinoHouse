@@ -3,6 +3,7 @@ package com.VinoHouse.service;
 import com.VinoHouse.dto.EmployeeDTO;
 import com.VinoHouse.dto.EmployeeLoginDTO;
 import com.VinoHouse.dto.EmployeePageQueryDTO;
+import com.VinoHouse.dto.PasswordEditDTO;
 import com.VinoHouse.entity.Employee;
 import com.VinoHouse.result.PageResult;
 
@@ -37,4 +38,9 @@ public interface EmployeeService {
      * 编辑员工信息
      */
     void update(EmployeeDTO employeeDTO);
+
+    /**
+     * 修改密码
+     */
+    void editPassword(PasswordEditDTO passwordEditDTO);
 }

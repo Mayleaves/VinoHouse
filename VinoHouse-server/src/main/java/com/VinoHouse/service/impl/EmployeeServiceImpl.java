@@ -7,6 +7,7 @@ import com.VinoHouse.context.BaseContext;
 import com.VinoHouse.dto.EmployeeDTO;
 import com.VinoHouse.dto.EmployeeLoginDTO;
 import com.VinoHouse.dto.EmployeePageQueryDTO;
+import com.VinoHouse.dto.PasswordEditDTO;
 import com.VinoHouse.entity.Employee;
 import com.VinoHouse.exception.AccountLockedException;
 import com.VinoHouse.exception.AccountNotFoundException;
@@ -149,5 +150,36 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        employee.setUpdateTime(LocalDateTime.now());
 //        employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
+    }
+
+    /**
+     * 编辑员工密码
+     */
+    public void editPassword(PasswordEditDTO passwordEditDTO) {
+        String oldPassword = passwordEditDTO.getOldPassword();  // 旧密码
+        String newPassword = passwordEditDTO.getNewPassword();  // 新密码
+
+
+        // 获取员工 id
+        Long empId = BaseContext.getCurrentId();
+
+        // 1. 根据 id 查询员工信息
+        Employee employee = employeeMapper.getById(empId);
+
+        // 2. 密码比对
+        String encryptedOldPassword = DigestUtils.md5DigestAsHex(oldPassword.getBytes());
+        if (!encryptedOldPassword.equals(employee.getPassword())) {
+            // 密码错误
+            throw new PasswordErrorException(MessageConstant.PASSWORD_EDIT_FAILED);
+        }
+
+        // 3. 更新密码
+        String encryptedNewPassword = DigestUtils.md5DigestAsHex(newPassword.getBytes());
+        employee.setPassword(encryptedNewPassword);
+        // AutoFill 赋值
+//        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setUpdateUser(empId);
+        employeeMapper.update(employee);
+
     }
 }
