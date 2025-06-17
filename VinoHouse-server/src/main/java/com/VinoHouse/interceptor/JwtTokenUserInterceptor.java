@@ -39,7 +39,7 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
 
         // 2、校验令牌
         try {
-            log.info("jwt 校验:{}", token);
+            log.info("jwt 校验：{}", token);
             Claims claims = JwtUtil.parseJWT(jwtProperties.getUserSecretKey(), token);
             Long userId = Long.valueOf(claims.get(JwtClaimsConstant.USER_ID).toString());
             log.info("当前用户的 id：", userId);
@@ -47,7 +47,7 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
             // 3、通过，放行
             return true;
         } catch (Exception ex) {
-            // 4、不通过，响应401状态码
+            // 4、不通过，响应 401 状态码
             response.setStatus(401);
             return false;
         }

@@ -32,7 +32,7 @@ public class BeverageController {
     private RedisTemplate redisTemplate;
 
     /**
-     * 新增酒水：
+     * 新增酒水
      * json：需要 @RequestBody
      */
     @PostMapping

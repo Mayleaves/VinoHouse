@@ -26,7 +26,7 @@ public class SetmealController {
     private SetmealService setmealService;
 
     /**
-     * 条件查询
+     * 根据分类 id 查询套餐
      */
     @GetMapping("/list")
     @ApiOperation("根据分类 id 查询套餐")

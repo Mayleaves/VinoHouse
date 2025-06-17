@@ -45,7 +45,10 @@ public class UserController {
         // 为微信用户生成 jwt 令牌
         Map<String, Object> claims = new HashMap<>();
         claims.put(JwtClaimsConstant.USER_ID, user.getId());
-        String token = JwtUtil.createJWT(jwtProperties.getUserSecretKey(), jwtProperties.getUserTtl(), claims);
+        String token = JwtUtil.createJWT(
+                jwtProperties.getUserSecretKey(),
+                jwtProperties.getUserTtl(),
+                claims);
 
         UserLoginVO userLoginVO = UserLoginVO.builder()
                 .id(user.getId())
@@ -53,5 +56,15 @@ public class UserController {
                 .token(token)
                 .build();
         return Result.success(userLoginVO);
+    }
+
+    /**
+     * 微信退出
+     * 前端没有写，接口文档测试也不行
+     */
+    @PostMapping("/logout")
+    @ApiOperation("微信退出")
+    public Result<String> logout() {
+        return Result.success();
     }
 }
