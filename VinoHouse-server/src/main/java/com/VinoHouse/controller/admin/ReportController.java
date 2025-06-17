@@ -42,18 +42,18 @@ public class ReportController {
         return Result.success(reportService.getTurnoverStatistics(begin,end));
     }
 
-//    /**
-//     * 用户统计
-//     */
-//    @GetMapping("/userStatistics")
-//    @ApiOperation("用户统计")
-//    public Result<UserReportVO> userStatistics(
-//            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
-//            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
-//        log.info("用户数据统计：{},{}",begin,end);
-//        return Result.success(reportService.getUserStatistics(begin,end));
-//    }
-//
+    /**
+     * 用户统计
+     */
+    @GetMapping("/userStatistics")
+    @ApiOperation("用户统计")
+    public Result<UserReportVO> userStatistics(
+            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        log.info("用户数据统计：{},{}",begin,end);
+        return Result.success(reportService.getUserStatistics(begin,end));
+    }
+
 //    /**
 //     * 订单统计
 //     */
