@@ -56,6 +56,8 @@ public class OrderTask {
         if (ordersList != null && ordersList.size() > 0) {
             for (Orders orders : ordersList) {
                 orders.setStatus(Orders.COMPLETED);
+                // 送达时间 = 预计送达时间 + 缓冲时间（2h）
+                orders.setDeliveryTime(orders.getEstimatedDeliveryTime().plusHours(2));
                 orderMapper.update(orders);
             }
         }
