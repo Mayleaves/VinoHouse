@@ -54,18 +54,18 @@ public class ReportController {
         return Result.success(reportService.getUserStatistics(begin,end));
     }
 
-//    /**
-//     * 订单统计
-//     */
-//    @GetMapping("/ordersStatistics")
-//    @ApiOperation("订单统计")
-//    public Result<OrderReportVO> ordersStatistics(
-//            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
-//            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
-//        log.info("订单数据统计：{},{}",begin,end);
-//        return Result.success(reportService.getOrderStatistics(begin,end));
-//    }
-//
+    /**
+     * 订单统计
+     */
+    @GetMapping("/ordersStatistics")
+    @ApiOperation("订单统计")
+    public Result<OrderReportVO> ordersStatistics(
+            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        log.info("订单数据统计：{},{}",begin,end);
+        return Result.success(reportService.getOrderStatistics(begin,end));
+    }
+
 //    /**
 //     * 销量排名 Top10
 //     */
