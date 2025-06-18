@@ -246,19 +246,19 @@ public class ReportServiceImpl implements ReportService {
             // 获取表格文件的 Sheet 页
             XSSFSheet sheet = excel.getSheet("Sheet1");
 
-            // 填充数据 —— 时间
-            sheet.getRow(1).getCell(1).setCellValue("时间：" + dateBegin + "至" + dateEnd);
+            // 填充时间（运营数据报表下）
+            sheet.getRow(1).getCell(1).setCellValue("时间：" + dateBegin + " 至 " + dateEnd);
 
-            // 获得第4行
+            // 概览数据
+            // 获得第 4 行
             XSSFRow row = sheet.getRow(3);
-            row.getCell(2).setCellValue(businessDataVO.getTurnover());
-            row.getCell(4).setCellValue(businessDataVO.getOrderCompletionRate());
-            row.getCell(6).setCellValue(businessDataVO.getNewUsers());
-
+            row.getCell(2).setCellValue(businessDataVO.getTurnover());  // 营业额
+            row.getCell(4).setCellValue(businessDataVO.getOrderCompletionRate());  // 订单完成率
+            row.getCell(6).setCellValue(businessDataVO.getNewUsers());  // 新增用户数
             // 获得第 5 行
             row = sheet.getRow(4);
-            row.getCell(2).setCellValue(businessDataVO.getValidOrderCount());
-            row.getCell(4).setCellValue(businessDataVO.getUnitPrice());
+            row.getCell(2).setCellValue(businessDataVO.getValidOrderCount());  // 有效订单
+            row.getCell(4).setCellValue(businessDataVO.getUnitPrice());  // 平均客单价
 
             // 填充明细数据
             for (int i = 0; i < 30; i++) {
@@ -267,16 +267,16 @@ public class ReportServiceImpl implements ReportService {
                 BusinessDataVO businessData = workspaceService.getBusinessData(LocalDateTime.of(date, LocalTime.MIN), LocalDateTime.of(date, LocalTime.MAX));
 
                 // 获得某一行
-                row = sheet.getRow(7 + i);
-                row.getCell(1).setCellValue(date.toString());
-                row.getCell(2).setCellValue(businessData.getTurnover());
-                row.getCell(3).setCellValue(businessData.getValidOrderCount());
-                row.getCell(4).setCellValue(businessData.getOrderCompletionRate());
-                row.getCell(5).setCellValue(businessData.getUnitPrice());
-                row.getCell(6).setCellValue(businessData.getNewUsers());
+                row = sheet.getRow(7 + i);  // 第 7 行开始
+                row.getCell(1).setCellValue(date.toString());  // 日期
+                row.getCell(2).setCellValue(businessData.getTurnover());  // 营业额
+                row.getCell(3).setCellValue(businessData.getValidOrderCount());  // 有效订单
+                row.getCell(4).setCellValue(businessData.getOrderCompletionRate());  // 订单完成率
+                row.getCell(5).setCellValue(businessData.getUnitPrice());  // 平均客单价
+                row.getCell(6).setCellValue(businessData.getNewUsers());  // 新增用户数
             }
 
-            // 3. 通过输出流将Excel文件下载到客户端浏览器
+            // 3. 通过输出流将 Excel 文件下载到客户端浏览器
             ServletOutputStream out = response.getOutputStream();
             excel.write(out);
 

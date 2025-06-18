@@ -78,12 +78,12 @@ public class ReportController {
         return Result.success(reportService.getSalesTop10(begin, end));
     }
 
-//    /**
-//     * 导出运营数据报表
-//     */
-//    @GetMapping("/export")
-//    @ApiOperation("导出运营数据报表")
-//    public void export(HttpServletResponse response){
-//        reportService.exportBusinessData(response);
-//    }
+    /**
+     * 导出运营数据报表
+     */
+    @GetMapping("/export")
+    @ApiOperation("导出运营数据报表")
+    public void export(HttpServletResponse response){
+        reportService.exportBusinessData(response);
+    }
 }

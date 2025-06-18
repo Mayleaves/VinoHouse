@@ -29,7 +29,8 @@
         <aspectj>1.9.4</aspectj>
         <jjwt>0.9.1</jjwt>
         <jaxb-api>2.3.1</jaxb-api>
-        <poi>3.16</poi>
+<!--        <poi>3.16</poi>--> <!-- 反射机制与模块系统的冲突 -->
+        <poi>5.2.3</poi>
     </properties>
     <dependencyManagement>
         <dependencies>
