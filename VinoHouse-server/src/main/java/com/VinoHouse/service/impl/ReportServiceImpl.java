@@ -63,7 +63,7 @@ public class ReportServiceImpl implements ReportService {
 
             // 查询“已完成”的订单金额：select sum(amount) from orders where order_time > beginTime and order_time < endTime and status = 5
             Double turnover = getTurnoverCount(beginTime, endTime);
-//            turnover = turnover == null ? 0.0 : turnover;  // 已合并在 sql 语法
+            // turnover = turnover == null ? 0.0 : turnover;  // 已合并在 sql 语法
             turnoverList.add(turnover);
         }
 
@@ -230,7 +230,7 @@ public class ReportServiceImpl implements ReportService {
      */
     public void exportBusinessData(HttpServletResponse response) {
         // 1. 查询数据库，获取营业数据 —— 查询最近 30 天的运营数据
-        LocalDate dateBegin = LocalDate.now().minusDays(30);
+        LocalDate dateBegin = LocalDate.now().minusDays(30);  // 减去 30 天
         LocalDate dateEnd = LocalDate.now().minusDays(1);
 
         // 查询概览数据
@@ -260,7 +260,7 @@ public class ReportServiceImpl implements ReportService {
             row.getCell(2).setCellValue(businessDataVO.getValidOrderCount());  // 有效订单
             row.getCell(4).setCellValue(businessDataVO.getUnitPrice());  // 平均客单价
 
-            // 填充明细数据
+            // 填充明细数据：遍历 30 天
             for (int i = 0; i < 30; i++) {
                 LocalDate date = dateBegin.plusDays(i);
                 // 查询某一天的营业数据
