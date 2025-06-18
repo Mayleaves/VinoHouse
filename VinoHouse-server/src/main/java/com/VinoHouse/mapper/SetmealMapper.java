@@ -69,9 +69,9 @@ public interface SetmealMapper {
             "from setmeal_beverage sd left join beverage d on sd.beverage_id = d.id " +
             "where sd.setmeal_id = #{setmealId}")
     List<BeverageItemVO> getBeverageItemBySetmealId(Long setmealId);
-//
-//    /**
-//     * 根据条件统计套餐数量
-//     */
-//    Integer countByMap(Map map);
+
+    /**
+     * 根据条件统计套餐数量
+     */
+    Integer countByMap(Map map);
 }

@@ -41,13 +41,13 @@ public class ReportServiceImpl implements ReportService {
 
     /**
      * 统计指定时间区间内的营业额数据
+     * 营业额：指状态为“5已完成”的订单金额合计
      */
     public TurnoverReportVO getTurnoverStatistics(LocalDate begin, LocalDate end) {
         // 当前集合用于存放从 begin 到 end 范围内的每天的日期
         List<LocalDate> dateList = new ArrayList<>();
 
-        dateList.add(begin);
-
+        dateList.add(begin);  // 加入第一天
         while (!begin.equals(end)) {
             // 日期计算，计算指定日期的后一天对应的日期
             begin = begin.plusDays(1);
@@ -57,26 +57,33 @@ public class ReportServiceImpl implements ReportService {
         // 存放每天的营业额
         List<Double> turnoverList = new ArrayList<>();
         for (LocalDate date : dateList) {
-            // 查询 date 日期对应的营业额数据，营业额是指：状态为“5已完成”的订单金额合计
-            LocalDateTime beginTime = LocalDateTime.of(date, LocalTime.MIN);
-            LocalDateTime endTime = LocalDateTime.of(date, LocalTime.MAX);
+            // 查询 date 日期对应的营业额数据
+            LocalDateTime beginTime = LocalDateTime.of(date, LocalTime.MIN);  // 00:00:00
+            LocalDateTime endTime = LocalDateTime.of(date, LocalTime.MAX);  // 23:59:59
 
-            //  select sum(amount) from orders where order_time > beginTime and order_time < endTime and status = 5
-            Map map = new HashMap();
-            map.put("begin", beginTime);
-            map.put("end", endTime);
-            map.put("status", Orders.COMPLETED);
-            Double turnover = orderMapper.sumByMap(map);
-            turnover = turnover == null ? 0.0 : turnover;
+            // 查询“已完成”的订单金额：select sum(amount) from orders where order_time > beginTime and order_time < endTime and status = 5
+            Double turnover = getTurnoverCount(beginTime, endTime);
+//            turnover = turnover == null ? 0.0 : turnover;  // 已合并在 sql 语法
             turnoverList.add(turnover);
         }
 
         // 封装返回结果
         return TurnoverReportVO
                 .builder()
-                .dateList(StringUtils.join(dateList, ","))
+                .dateList(StringUtils.join(dateList, ","))  // dateList 的值以 , 分割
                 .turnoverList(StringUtils.join(turnoverList, ","))
                 .build();
+    }
+
+    /**
+     * 根据时间区间统计营业额数据
+     */
+    private Double getTurnoverCount(LocalDateTime beginTime, LocalDateTime endTime) {
+        Map map = new HashMap();
+        map.put("begin", beginTime);  // key 对应 mapper 中 test
+        map.put("end", endTime);
+        map.put("status", Orders.COMPLETED);
+        return orderMapper.sumByMap(map);
     }
 
     /**
@@ -100,9 +107,9 @@ public class ReportServiceImpl implements ReportService {
             LocalDateTime beginTime = LocalDateTime.of(date, LocalTime.MIN);
             LocalDateTime endTime = LocalDateTime.of(date, LocalTime.MAX);
 
-            // 新增用户数量：select count(id) from user where create_time > ? and create_time < ?
+            // 新增用户数量：select count(id) from user where create_time > beginTime and create_time < endTime
             Integer newUser = getUserCount(beginTime, endTime);
-            // 总用户数量：select count(id) from user where  create_time < ?
+            // 总用户数量：select count(id) from user where  create_time < endTime
             Integer totalUser = getUserCount(null, endTime);
 
             newUserList.add(newUser);
@@ -152,9 +159,9 @@ public class ReportServiceImpl implements ReportService {
             LocalDateTime beginTime = LocalDateTime.of(date, LocalTime.MIN);
             LocalDateTime endTime = LocalDateTime.of(date, LocalTime.MAX);
 
-            // 查询每天的订单总数：select count(id) from orders where order_time > ? and order_time < ?
+            // 查询每天的订单总数：select count(id) from orders where order_time > beginTime and order_time < endTime
             Integer orderCount = getOrderCount(beginTime, endTime, null);
-            // 查询每天的有效订单数：select count(id) from orders where order_time > ? and order_time < ? and status = 5
+            // 查询每天的有效订单数：select count(id) from orders where order_time > beginTime and order_time < endTime and status = 5
             Integer validOrderCount = getOrderCount(beginTime, endTime, Orders.COMPLETED);
 
             orderCountList.add(orderCount);
@@ -168,11 +175,12 @@ public class ReportServiceImpl implements ReportService {
         Integer validOrderCount = validOrderCountList.stream().reduce(Integer::sum).get();
 
         Double orderCompletionRate = 0.0;
-        if (totalOrderCount != 0) {
+        if (totalOrderCount != 0) {  // 防止除以 0
             // 计算订单完成率
             orderCompletionRate = validOrderCount.doubleValue() / totalOrderCount;
         }
 
+        // 封装返回结果数据
         return OrderReportVO.builder()
                 .dateList(StringUtils.join(dateList, ","))
                 .orderCountList(StringUtils.join(orderCountList, ","))
@@ -196,24 +204,24 @@ public class ReportServiceImpl implements ReportService {
     }
 
     /**
-     * 统计指定时间区间内的销量排名前10
+     * 统计指定时间区间内的销量排名前 10
      */
     public SalesTop10ReportVO getSalesTop10(LocalDate begin, LocalDate end) {
         LocalDateTime beginTime = LocalDateTime.of(begin, LocalTime.MIN);
         LocalDateTime endTime = LocalDateTime.of(end, LocalTime.MAX);
 
+        // select od.name, sum(od.number) number from order_detail od, orders o where od.order_id = o.id and o.status = 5 and o.order_time > beginTime and o.order_time < endTime
+        // group by od.name order by number limit 0, 10
         List<GoodsSalesDTO> salesTop10 = orderMapper.getSalesTop10(beginTime, endTime);
+        // 转换格式
         List<String> names = salesTop10.stream().map(GoodsSalesDTO::getName).collect(Collectors.toList());
-        String nameList = StringUtils.join(names, ",");
-
         List<Integer> numbers = salesTop10.stream().map(GoodsSalesDTO::getNumber).collect(Collectors.toList());
-        String numberList = StringUtils.join(numbers, ",");
 
         // 封装返回结果数据
         return SalesTop10ReportVO
                 .builder()
-                .nameList(nameList)
-                .numberList(numberList)
+                .nameList(StringUtils.join(names, ","))
+                .numberList(StringUtils.join(numbers, ","))
                 .build();
     }
 

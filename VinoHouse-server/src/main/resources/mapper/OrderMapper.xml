@@ -73,7 +73,7 @@
     </select>
 
     <select id="sumByMap" resultType="java.lang.Double">
-        select sum(amount) from orders
+        select ifnull(sum(amount), 0.0) from orders <!-- 当 sum(amount) 为 null 时会返回 0.0 -->
         <where>
             <if test="begin != null">
                 and order_time &gt; #{begin}
