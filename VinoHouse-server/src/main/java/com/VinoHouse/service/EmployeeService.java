@@ -7,6 +7,8 @@ import com.VinoHouse.dto.PasswordEditDTO;
 import com.VinoHouse.entity.Employee;
 import com.VinoHouse.result.PageResult;
 
+import java.util.List;
+
 public interface EmployeeService {
 
     /**
@@ -43,4 +45,9 @@ public interface EmployeeService {
      * 修改密码
      */
     void editPassword(PasswordEditDTO passwordEditDTO);
+
+    /**
+     * 删除员工
+     */
+    void delete(Long id);
 }

@@ -16,9 +16,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -137,6 +139,16 @@ public class EmployeeController {
     public Result editPassword(@RequestBody PasswordEditDTO passwordEditDTO){
         log.info("修改密码：{}", passwordEditDTO);
         employeeService.editPassword(passwordEditDTO);
+        return Result.success();
+    }
+
+    /**
+     * 删除员工
+     */
+    @DeleteMapping
+    @ApiOperation("删除员工")
+    public Result delete(@RequestParam Long id) {
+        employeeService.delete(id);
         return Result.success();
     }
 }

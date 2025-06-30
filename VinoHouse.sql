@@ -7,7 +7,7 @@ USE `VinoHouse_take_out`;
 DROP TABLE IF EXISTS `address_book`;
 CREATE TABLE `address_book` (
     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `user_id` bigint NOT NULL COMMENT '用户id',
+    `user_id` bigint NOT NULL COMMENT '用户 id',
     `consignee` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '收货人',
     `sex` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '性别',
     `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '手机号',
@@ -19,7 +19,7 @@ CREATE TABLE `address_book` (
     `district_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '区级名称',
     `detail` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '详细地址',
     `label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '标签',
-    `is_default` tinyint(1) NOT NULL DEFAULT '0' COMMENT '默认 0 否 1是',
+    `is_default` tinyint(1) NOT NULL DEFAULT '0' COMMENT '默认：0否 1是',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='地址簿';
 
@@ -27,10 +27,10 @@ CREATE TABLE `address_book` (
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `type` int DEFAULT NULL COMMENT '类型 1 酒水分类 2 套餐分类',
+    `type` int DEFAULT NULL COMMENT '类型：1酒水分类 2套餐分类',
     `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '分类名称',
     `sort` int NOT NULL DEFAULT '0' COMMENT '顺序',
-    `status` int DEFAULT NULL COMMENT '分类状态 0:禁用，1:启用',
+    `status` int DEFAULT NULL COMMENT '分类状态：0禁用 1启用',
     `create_time` datetime DEFAULT NULL COMMENT '创建时间',
     `update_time` datetime DEFAULT NULL COMMENT '更新时间',
     `create_user` bigint DEFAULT NULL COMMENT '创建人',
@@ -57,11 +57,11 @@ DROP TABLE IF EXISTS `beverage`;
 CREATE TABLE `beverage` (
     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
     `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '酒水名称',
-    `category_id` bigint NOT NULL COMMENT '酒水分类id',
+    `category_id` bigint NOT NULL COMMENT '酒水分类 id',
     `price` decimal(10,2) DEFAULT NULL COMMENT '酒水价格',
     `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图片',
     `description` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '描述信息',
-    `status` int DEFAULT '1' COMMENT '0 停售 1 起售',
+    `status` int DEFAULT '1' COMMENT '酒水状态：0停售 1起售',
     `create_time` datetime DEFAULT NULL COMMENT '创建时间',
     `update_time` datetime DEFAULT NULL COMMENT '更新时间',
     `create_user` bigint DEFAULT NULL COMMENT '创建人',
@@ -103,7 +103,7 @@ CREATE TABLE `beverage_flavor` (
     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
     `beverage_id` bigint NOT NULL COMMENT '酒水',
     `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '口味名称',
-    `value` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '口味数据list',
+    `value` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '口味数据 list',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='酒水口味关系表';
 
@@ -168,7 +168,7 @@ CREATE TABLE `employee` (
     `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '手机号',
     `sex` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '性别',
     `id_number` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '身份证号',
-    `status` int NOT NULL DEFAULT '1' COMMENT '状态 0:禁用，1:启用',
+    `status` int NOT NULL DEFAULT '1' COMMENT '员工状态：0禁用 1启用',
     `create_time` datetime DEFAULT NULL COMMENT '创建时间',
     `update_time` datetime DEFAULT NULL COMMENT '更新时间',
     `create_user` bigint DEFAULT NULL COMMENT '创建人',
@@ -185,9 +185,9 @@ CREATE TABLE `order_detail` (
     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
     `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '名字',
     `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图片',
-    `order_id` bigint NOT NULL COMMENT '订单id',
-    `beverage_id` bigint DEFAULT NULL COMMENT '酒水id',
-    `setmeal_id` bigint DEFAULT NULL COMMENT '套餐id',
+    `order_id` bigint NOT NULL COMMENT '订单 id',
+    `beverage_id` bigint DEFAULT NULL COMMENT '酒水 id',
+    `setmeal_id` bigint DEFAULT NULL COMMENT '套餐 id',
     `beverage_flavor` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '口味',
     `number` int NOT NULL DEFAULT '1' COMMENT '数量',
     `amount` decimal(10,2) NOT NULL COMMENT '金额',
@@ -199,13 +199,13 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
     `number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '订单号',
-    `status` int NOT NULL DEFAULT '1' COMMENT '订单状态 1待付款 2待接单 3已接单 4派送中 5已完成 6已取消 7退款',
+    `status` int NOT NULL DEFAULT '1' COMMENT '订单状态：1待付款 2待接单 3已接单 4派送中 5已完成 6已取消 7退款',
     `user_id` bigint NOT NULL COMMENT '下单用户',
-    `address_book_id` bigint NOT NULL COMMENT '地址id',
+    `address_book_id` bigint NOT NULL COMMENT '地址 id',
     `order_time` datetime NOT NULL COMMENT '下单时间',
     `checkout_time` datetime DEFAULT NULL COMMENT '结账时间',
-    `pay_method` int NOT NULL DEFAULT '1' COMMENT '支付方式 1微信,2支付宝',
-    `pay_status` tinyint NOT NULL DEFAULT '0' COMMENT '支付状态 0未支付 1已支付 2退款',
+    `pay_method` int NOT NULL DEFAULT '1' COMMENT '支付方式：1微信 2支付宝',
+    `pay_status` tinyint NOT NULL DEFAULT '0' COMMENT '支付状态：0未支付 1已支付 2退款',
     `amount` decimal(10,2) NOT NULL COMMENT '实收金额',
     `remark` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '备注',
     `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
@@ -216,11 +216,11 @@ CREATE TABLE `orders` (
     `rejection_reason` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '订单拒绝原因',
     `cancel_time` datetime DEFAULT NULL COMMENT '订单取消时间',
     `estimated_delivery_time` datetime DEFAULT NULL COMMENT '预计送达时间',
-    `delivery_status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '配送状态 1立即送出 0选择具体时间',
+    `delivery_status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '配送状态：1立即送出 0选择具体时间',
     `delivery_time` datetime DEFAULT NULL COMMENT '送达时间',
     `pack_amount` int DEFAULT NULL COMMENT '打包费',
     `tableware_number` int DEFAULT NULL COMMENT '餐具数量',
-    `tableware_status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '餐具数量状态 1按餐量提供 0选择具体数量',
+    `tableware_status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '餐具数量状态：1按餐量提供 0选择具体数量',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='订单表';
 
@@ -228,10 +228,10 @@ CREATE TABLE `orders` (
 DROP TABLE IF EXISTS `setmeal`;
 CREATE TABLE `setmeal` (
     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `category_id` bigint NOT NULL COMMENT '酒水分类id',
+    `category_id` bigint NOT NULL COMMENT '酒水分类 id',
     `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '套餐名称',
     `price` decimal(10,2) NOT NULL COMMENT '套餐价格',
-    `status` int DEFAULT '1' COMMENT '售卖状态 0:停售 1:起售',
+    `status` int DEFAULT '1' COMMENT '售卖状态：0停售 1起售',
     `description` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '描述信息',
     `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图片',
     `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -251,8 +251,8 @@ INSERT INTO `setmeal` VALUES
 DROP TABLE IF EXISTS `setmeal_beverage`;
 CREATE TABLE `setmeal_beverage` (
     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `setmeal_id` bigint DEFAULT NULL COMMENT '套餐id',
-    `beverage_id` bigint DEFAULT NULL COMMENT '酒水id',
+    `setmeal_id` bigint DEFAULT NULL COMMENT '套餐 id',
+    `beverage_id` bigint DEFAULT NULL COMMENT '酒水 id',
     `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '酒水名称（冗余字段）',
     `price` decimal(10,2) DEFAULT NULL COMMENT '酒水单价（冗余字段）',
     `copies` int DEFAULT NULL COMMENT '酒水份数',
@@ -276,8 +276,8 @@ CREATE TABLE `shopping_cart` (
     `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '商品名称',
     `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图片',
     `user_id` bigint NOT NULL COMMENT '主键',
-    `beverage_id` bigint DEFAULT NULL COMMENT '酒水id',
-    `setmeal_id` bigint DEFAULT NULL COMMENT '套餐id',
+    `beverage_id` bigint DEFAULT NULL COMMENT '酒水 id',
+    `setmeal_id` bigint DEFAULT NULL COMMENT '套餐 id',
     `beverage_flavor` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '口味',
     `number` int NOT NULL DEFAULT '1' COMMENT '数量',
     `amount` decimal(10,2) NOT NULL COMMENT '金额',
@@ -295,6 +295,6 @@ CREATE TABLE `user` (
     `sex` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '性别',
     `id_number` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '身份证号',
     `avatar` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '头像',
-    `create_time` datetime DEFAULT NULL,
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户信息';

@@ -9,8 +9,10 @@ import com.VinoHouse.dto.EmployeeLoginDTO;
 import com.VinoHouse.dto.EmployeePageQueryDTO;
 import com.VinoHouse.dto.PasswordEditDTO;
 import com.VinoHouse.entity.Employee;
+import com.VinoHouse.entity.Setmeal;
 import com.VinoHouse.exception.AccountLockedException;
 import com.VinoHouse.exception.AccountNotFoundException;
+import com.VinoHouse.exception.DeletionNotAllowedException;
 import com.VinoHouse.exception.PasswordErrorException;
 import com.VinoHouse.mapper.EmployeeMapper;
 import com.VinoHouse.result.PageResult;
@@ -21,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
@@ -181,5 +184,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        employee.setUpdateUser(empId);
         employeeMapper.update(employee);
 
+    }
+
+    /**
+     * 批量删除员工
+     */
+    @Transactional
+    public void delete(Long id) {
+        Employee employee = employeeMapper.getById(id);
+        if (employee.getStatus() == StatusConstant.ENABLE) {
+            // 启用中的员工账号不能删除
+            throw new DeletionNotAllowedException(MessageConstant.ACCOUNT_ACTIVATION);
+        }
+        // 删除员工表中的数据
+        employeeMapper.deleteById(id);
     }
 }

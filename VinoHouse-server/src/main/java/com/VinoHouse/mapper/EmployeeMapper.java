@@ -4,6 +4,7 @@ import com.VinoHouse.annotation.AutoFill;
 import com.VinoHouse.dto.EmployeePageQueryDTO;
 import com.VinoHouse.entity.Employee;
 import com.VinoHouse.enumeration.OperationType;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -44,4 +45,10 @@ public interface EmployeeMapper {
      */
     @Select("select * from employee where id = #{id}")
     Employee getById(Long id);
+
+    /**
+     * 根据 id 删除员工
+     */
+    @Delete("delete from employee where id = #{id}")
+    void deleteById(Long employeeId);
 }
