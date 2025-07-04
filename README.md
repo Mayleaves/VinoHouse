@@ -1,4 +1,5 @@
-客户端代码见“VinoHouse-vue-ts”仓库，用户端代码见“VinoHouse-wexin”仓库。
+管理端代码见“VinoHouse-vue-ts”仓库，用户端代码见“VinoHouse-wexin”仓库。
+
 > 前端代码：
 >
 > - node v12.x；
