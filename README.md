@@ -1,3 +1,4 @@
+客户端代码见“VinoHouse-vue-ts”仓库，用户端代码见“VinoHouse-wexin”仓库。
 > 前端代码：
 >
 > - node v12.x；
@@ -1764,6 +1765,8 @@ public Docket docket2(){
 
 
 ## 3.3 微信登录、商品浏览
+
+微信开发者工具 工程名：VinoHouse-weixin。
 
 ### 3.3.1 HttpClient
 
@@ -3681,6 +3684,8 @@ VinoHouse-server
 
 
 # 前端 - 管理端
+
+Vue 工程名：VinoHouse-vue-ts。
 
 技术栈：HTML、CSS、JavaScript、Axios、Vue、Element UI
 
